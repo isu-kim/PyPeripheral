@@ -1,5 +1,6 @@
 # PyPheperial
 A program written in python for syncing all the Peripherals connected to computer using SDKs.
+Python Version 3.7
 
 
 ## Basic Info 

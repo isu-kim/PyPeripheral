@@ -28,9 +28,13 @@ Both seems to use DLL or C++ files for their own libraries. However, I do not ha
 
 I will be borrowing and modifying. some open source projects for this program. Since it would be almost impossible for me to make a python wrapper just by myself. Those projects are ones that I am currently borrowing. Those might be removed or added later.
 
+- Corsair ICUE SDK
+[http://forum.corsair.com/v3/showthread.php?t=179027](http://forum.corsair.com/v3/showthread.php?t=179027)
+for main Corsair ICUE SDK
+
  - CUE_SDK by 10se1ucgo
  [https://github.com/10se1ucgo/cue_sdk](https://github.com/10se1ucgo/cue_sdk)
- for Corsair ICUE SDK
+ for Corsair ICUE SDK wrapping
 
 Massive thanks to those project contributors.
  

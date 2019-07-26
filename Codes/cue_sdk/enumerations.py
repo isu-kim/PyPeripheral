@@ -43,13 +43,13 @@ class KeywordMeta(EnumMeta):
 
 
 class CLK(CEnum, metaclass=KeywordMeta):
-''' 
-+ PyPheperial by Gooday2die
-Was class CLK((with_metaclass(KeywordMeta, CEnum))):
-However, it causes error when it is above Python 3.7.
-see https://github.com/10se1ucgo/cue_sdk/issues/9 for more.
+    ''' 
+    + PyPheperial by Gooday2die
+    Was class CLK((with_metaclass(KeywordMeta, CEnum))):
+    However, it causes error when it is above Python 3.7.
+    see https://github.com/10se1ucgo/cue_sdk/issues/9 for more.
 
-'''
+    '''
     """
     Enumeration containing available keys
     """
@@ -298,13 +298,13 @@ class CLL(CEnum):
 
 # contains list of device capabilities
 class CDC(CEnum, metaclass=KeywordMeta):
-''' 
-+ PyPheperial by Gooday2die
-Was class CLK((with_metaclass(KeywordMeta, CEnum))):
-However, it causes error when it is above Python 3.7.
-see https://github.com/10se1ucgo/cue_sdk/issues/9 for more.
+    ''' 
+    + PyPheperial by Gooday2die
+    Was class CLK((with_metaclass(KeywordMeta, CEnum))):
+    However, it causes error when it is above Python 3.7.
+    see https://github.com/10se1ucgo/cue_sdk/issues/9 for more.
 
-'''    
+    '''    
     _None = 0
     Lighting = 1
 CDC._member_map_['None'] = CDC._None

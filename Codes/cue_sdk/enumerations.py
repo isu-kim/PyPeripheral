@@ -224,7 +224,19 @@ CLK._member_map_['0'] = CLK._0
 class CDT(CEnum):
     """
     Enumeration containing available device types.
+    
     """
+
+    '''
+    + PyPheperial by Gooy2die : 
+    Added a CDT device type Mousepad = 4
+    MM800 caused a CDT error when the program runs. 
+    
+    MM800 is regarded as Mousepad which is 4 in CDT. However, the program does not have a option for 4.
+    enum.py returns a "ValueError : 4 is not a valid CDT" when executed. 
+    So I added Mousepad = 4 to make it a valid integer return value. 
+    '''
+    
     Unknown = 0
     Mouse = 1
     Keyboard = 2

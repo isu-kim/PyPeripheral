@@ -20,7 +20,7 @@ If you would like to borrow these key mappings for other projects, feel free to 
 **NOT K95 OLD Version With 18 Macro Keys.**
 If you use that one, it is just fine for you to use normal enumerations file.
 
-![K95 RGB Model.](https://www.corsair.com/corsairmedia/sys_master/productcontent/k95rgbplatinum-Content-4.png)
+![K95 RGB Model.](https://github.com/gooday2die/PyPheperial/raw/master/Codes/cue_sdk/enumerations/pics/K95.png)
 
 **Normal Keys**
 
@@ -181,7 +181,7 @@ I am not quite sure that there is a LED in scroll wheel.
 Otherwise, my mouse is just broken.. :b
 
 The left and right side LED bars are controlled at once. 
-![Glaive RGB PRO](https://www.corsair.com/medias/sys_master/images/images/hf2/hdf/9211572682782/-CH-9302211-AP-Gallery-GLAIVE-RGB-PRO-BLACK-01.png)
+![Glaive RGB PRO](https://github.com/gooday2die/PyPheperial/raw/master/Codes/cue_sdk/enumerations/pics/GLAIVE.png)
 
 
     GLAV_1 = 189 # side LEDs
@@ -190,7 +190,7 @@ The left and right side LED bars are controlled at once.
 
 ## MM800 POLARIS 
 MM800 has 15 different LED zones on the surface. (Confirmed by Corsair)
-![MM800](https://www.corsair.com/medias/sys_master/images/images/hb6/h32/9132768854046/-CH-9440020-AP-Gallery-MM800-01.png)
+![MM800](https://github.com/gooday2die/PyPheperial/raw/master/Codes/cue_sdk/enumerations/pics/MM800.png)
 
 
     MM800_1 = 155 # Mousepad LED #1 from left top.
@@ -214,7 +214,7 @@ I am not sure about the wireless model.
 There are two controllable LEDs in both Right and Left.
 Mute button and Mic On and Off button is not controllable right now.
 
-![VoidProRGB](https://www.corsair.com//medias/sys_master/images/images/h5e/h2e/8838301286430/-CA-9011154-AP-Gallery-Gallery-1.png)
+![VoidProRGB](https://github.com/gooday2die/PyPheperial/raw/master/Codes/cue_sdk/enumerations/pics/VOIDPRO.png)
 
 
     # Headset leds

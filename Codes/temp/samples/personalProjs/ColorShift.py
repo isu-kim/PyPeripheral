@@ -3,6 +3,7 @@ from __future__ import division
 import win32api
 import win32con
 import time
+import random
 import sys
 
 from cue_sdk import *
@@ -24,7 +25,13 @@ def initTest():
     for i in range(200):
         ledOn(i,0,0,0,float(0.001))
 
-#def shift():
+def shift():
+    while True:
+        for i in range(200):
+            RandRVal = random.randrange(0,255)
+            RandGVal = random.randrange(0,255)
+            RandBVal = random.randrange(0,255)
+            ledOn(i,RandRVal, RandGVal, RandBVal, 0.001)
 
 
 def range_float(start, stop, step):
@@ -82,6 +89,8 @@ def main():
         time.sleep(0.025)
 
 
+
+
 if __name__ == "__main__":
     # To determine whether or not we are using a 64-bit version of Python,
     # we will check sys.maxsize. 64-bit Python will have a maxsize value of
@@ -90,4 +99,5 @@ if __name__ == "__main__":
     cue = CUESDK(r"C:\Users\FlagShipPC\Downloads\CUESDK.x64_2015.dll")
 
     cue.request_control(CAM.ExclusiveLightingControl)
-    initTest()
+    #initTest()
+    shift()

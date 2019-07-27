@@ -14,7 +14,7 @@ ex) if you use K95 RGB , you can just rename K95_RGB_PLAT.py into enumerations.p
 
 I am planning to make a auto support for this program, so you might not see this directory later in the future. 
 
-If you would like to borrow these key mappings for other projects, feel free to do so. I do not want anyone else to do this dirty work again.
+If you would like to borrow these LED mappings for other projects, feel free to do so. I do not want anyone else to do this dirty work again.
 
 ## K95 RGB Mappings
 **NOT K95 OLD Version With 18 Macro Keys.**

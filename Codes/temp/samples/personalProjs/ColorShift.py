@@ -31,7 +31,19 @@ def shift():
             RandRVal = random.randrange(0,255)
             RandGVal = random.randrange(0,255)
             RandBVal = random.randrange(0,255)
-            ledOn(i,RandRVal, RandGVal, RandBVal, 0.001)
+            ledOn(i,RandRVal, RandGVal, RandBVal, 0.0001)
+
+def loading():
+    loopcnt = 1
+    while True:
+        for i in range(170,188,1):
+            ledOn(i,255,0,0,0.01)
+            ledOn(i+1,255,0,0,0.01)
+        for i in range(170, 188, 1):
+            ledOn(i, 0, 0, 0, 0.01)
+            ledOn(i + 1, 0, 0, 0, 0.01)
+        print("Loop # " + str(loopcnt))
+        loopcnt = loopcnt + 1
 
 
 def range_float(start, stop, step):
@@ -100,4 +112,5 @@ if __name__ == "__main__":
 
     cue.request_control(CAM.ExclusiveLightingControl)
     #initTest()
-    shift()
+    #shift()
+    loading()

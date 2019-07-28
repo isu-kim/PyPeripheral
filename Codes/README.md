@@ -1,15 +1,14 @@
 
-## Codes
-This directory is mainly on codes.
-I am currently borrowing some other projects for now, and there would be those projects in this directory as well.
+## Overview
+This directory is for codes, just like it says it in the name.
+I am currently revising my codes in order to make them neat and tidy. Otherwise, the codes would be spaghetti codes. 
 
-## Information
-Abstract information about those directories.
- - cue_sdk 
-codes for wrapping ICUE into Python.
-originated from [CUE_SDK](https://github.com/10se1ucgo/cue_sdk) by 10se1ucgo
+All the functions and features could be seen in each README.md files.
 
- - temp
-literally temporary directory for development.
-might have a lot of dirty codes that only I can understand :b
+## Informations
 
+ - Wrappers Directory.
+Everything related to SDK to Python porting should be updated there. 
+
+- main.py
+This is the main Python Script that would be needed to run the project. I would post some examples later I finish some more of low-level based work. 

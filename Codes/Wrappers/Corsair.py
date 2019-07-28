@@ -17,28 +17,31 @@ def range_float(start, stop, step):
 
 
 def debug():
+    global debug
     if debug:
-        return False
+        return True
     else:
         return False
 
 def debugON():
     print("[DEBUG] Debug Enabled.")
+    global debug
     debug = True
 
 def debugOFF():
     print("[DEBUG] Debug Disabled.")
+    global debug
     debug = False
 
 def DeviceInfo():
-    Device_List = []
+    global DeviceList
     print(("[INFO] There are " + str(cue.get_device_count())) +" connected Corsair devices." )
     for i in range(cue.get_device_count()):
         print("Device #" + str(i+1) , str(cue.get_device_info(i))) # For all details about the devices
         #print("Device #" + str(i+1) , str(cue.get_device_info(i)[1])) # For just names
         thing_to_append = (str(cue.get_device_info(i)[1]) +"_" +str(cue.get_device_info(i)[0]))
-        Device_List.append(thing_to_append)
-    return Device_List
+        DeviceList.append(thing_to_append)
+    return DeviceList
 
 def RequestControl():
     cue.RequestControl(CAM.ExclusiveLightingControl)
@@ -74,6 +77,7 @@ def ledSmoothOn(LED_ID,RVal,GVal,BVal,Duration):
 
 def DeviceID(DeviceList):
     print(DeviceList)
+    global  NewDeviceID
     for i in range(len(DeviceList)):
         if ".Mousepad" in DeviceList[i]:
             NewDeviceID.append("4" + str(DeviceList[i].replace(".Mousepad","".replace("_CDT",""))))
@@ -91,6 +95,7 @@ def DeviceID(DeviceList):
 
 
 def KeyboardCheck():
+    global NewDeviceID
     if ".Keyboard" in DeviceList:
         if "K95 RGB PLATINUM" in DeviceList:
             ledOn(CLK.G1, 0, 255, 0, 0.1)
@@ -150,9 +155,13 @@ def KeyboardCheck():
         for i in range(len(NewDeviceID)):
             if NewDeviceID[i][1] == 2:
                 print("[INFO]" , str(DeviceList[i].replace("2","")) , "Connected")
+    else:
+        print("[INFO] No Corsair Keyboard Detected")
 
 
 def MousePadCheck():
+    global NewDeviceID
+
     if "MM800RGB" in DeviceList:
         for i in range(2):
             ledSmoothOn(CLK.MM800_1, 0, 255, 0, 0.01)
@@ -170,6 +179,8 @@ def MousePadCheck():
         print("[INFO] No Corsair Mouse Pad Detected")
 
 def MouseCheck():
+    global NewDeviceID
+
     if "GLAIVE RGB" in DeviceList:
         for i in range(2):
             ledSmoothOn(CLK.GLAV_2, 0, 255, 0, 0.01)
@@ -189,6 +200,8 @@ def MouseCheck():
 
 
 def HeadPhoneCheck():
+    global NewDeviceID
+
     if "VOID PRO USB" in DeviceList:
         for i in range(2):
             ledSmoothOn(CLK.VOIDPRO_L, 0, 255, 0, 0.01)
@@ -209,16 +222,10 @@ def HeadPhoneCheck():
 
 def FirstInit():
     RequestControl()
-    DeviceList = DeviceInfo()
 
 
     KeyboardCheck()
     MousePadCheck()
     MouseCheck()
     HeadPhoneCheck()
-
-
-
-
-
 

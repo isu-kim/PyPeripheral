@@ -78,5 +78,22 @@ Checks the headphone model and lights green LEDs for success.
 - **FirstInit(None)**
 Checks All the connected devices and requests control over ICUE.
 
+- **DeviceID(DeviceList)**
+Finds the number that matches the Devices. No need for Devs to control
+
+- **Variable : debug**
+Variable that stores the debug state.
+
+- **Variable : DeviceList**
+List that stores all devices
+
+- **Variable : NewDeviceID**
+List that stores all devices for future use. No need for other Devs to use
+
+- **Variable : DeviceType**
+List that stores all device types for future use. No need for other Devs to use
+
+
+
 ## Razer SDK
 Would be working on it soon after I finish Corsair.

@@ -20,19 +20,19 @@ def range_float(start, stop, step):
 
 
 def debugON():
-    print("[DEBUG] Debug Enabled.")
+    print("[CORSAIR] Debug Enabled.")
     global debug
     debug = True
 
 def debugOFF():
-    print("[DEBUG] Debug Disabled.")
+    print("[CORSAIR] Debug Disabled.")
     global debug
     debug = False
 
 def DeviceInfo():
     global DeviceList
     global DeviceType
-    print(("[INFO] There are " + str(cue.get_device_count())) +" connected Corsair devices." )
+    print(("[CORSAIR] There are " + str(cue.get_device_count())) +" connected Corsair devices." )
     for i in range(cue.get_device_count()):
         #print("Device #" + str(i+1) , str(cue.get_device_info(i))) # For all details about the devices
         print("Device #" + str(i+1) , str(cue.get_device_info(i)[1])) # For just names
@@ -43,11 +43,11 @@ def DeviceInfo():
 
 def RequestControl():
     cue.RequestControl(CAM.ExclusiveLightingControl)
-    print("[INFO] Successfully Requested Corsair ICUE Control")
+    print("[CORSAIR] Successfully Requested Corsair ICUE Control")
 
 def ReleaseControl():
     cue.ReleaseControl(CAM.ExclusiveLightingControl)
-    print("[INFO] Successfully Released Corsair ICUE Control")
+    print("[CORSAIR] Successfully Released Corsair ICUE Control")
 
 def BlackLED(LED_ID):
     led_color = CorsairLedColor(LED_ID, 0, 0, 0)
@@ -56,7 +56,7 @@ def BlackLED(LED_ID):
 
 def ledOn(LED_ID,RVal,GVal,BVal,Duration):
     if debug:
-        print("[DEBUG] LED_ID :", str(LED_ID),"R :", str(RVal) ,"G :",str(GVal)," B :" , str(BVal) , "Duration :" , str(Duration))
+        print("[CORSAIR] LED_ID :", str(LED_ID),"R :", str(RVal) ,"G :",str(GVal)," B :" , str(BVal) , "Duration :" , str(Duration))
     led_color = CorsairLedColor(LED_ID, RVal, GVal, BVal)
     cue.set_led_colors(led_color)
     time.sleep(Duration)
@@ -68,7 +68,7 @@ def ledSmoothOn(LED_ID,RVal,GVal,BVal,Duration):
         NGval = int((1 - abs(x - 1)) * GVal)
         NBval = int((1 - abs(x - 1)) * BVal)
         if debug:
-            print("[DEBUG] LED_ID :", str(LED_ID), "R :", str(NRval), "G :", str(NGval), " B :", str(NBval), "Duration :", str(Duration))
+            print("[CORSAIR] LED_ID :", str(LED_ID), "R :", str(NRval), "G :", str(NGval), " B :", str(NBval), "Duration :", str(Duration))
         led_color = CorsairLedColor(LED_ID, NRval, NGval , NBval)
         cue.set_led_colors(led_color)
         time.sleep(Duration)
@@ -156,10 +156,10 @@ def KeyboardCheck():
                 ledOn(CLK.F12, 0, 0, 0, 0.1)
 
 
-            print("[INFO]" , str(NewDeviceID[KeyboardID]) , "Connected")
+            print("[CORSAIR]" , str(NewDeviceID[KeyboardID]) , "Connected")
             return
 
-    print("[INFO] No Corsair Keyboard Found")
+    print("[CORSAIR] No Corsair Keyboard Found")
 
 
 def MousePadCheck():
@@ -180,10 +180,10 @@ def MousePadCheck():
                 for i in range(155, 169, 1):
                     ledOn(i, 0, 0, 0, 0.1)
 
-                print("[INFO]" , str(NewDeviceID[MousePadID]) , "Connected")
+                print("[CORSAIR]" , str(NewDeviceID[MousePadID]) , "Connected")
                 return
 
-    print("[INFO] No Corsair Mouse Pad Found")
+    print("[CORSAIR] No Corsair Mouse Pad Found")
 
 def MouseCheck():
     global NewDeviceID
@@ -203,10 +203,10 @@ def MouseCheck():
             for i in [CLK.GLAV_1 , CLK.GLAV_2 , CLK.GLAV_3]:
                 ledOn(i, 0, 0, 0, 0.1)
 
-            print("[INFO]" , str(NewDeviceID[MouseID]) , "Connected")
+            print("[CORSAIR]" , str(NewDeviceID[MouseID]) , "Connected")
             return
 
-    print("[INFO] No Corsair Mouse Found")
+    print("[CORSAIR] No Corsair Mouse Found")
 
 def HeadPhoneCheck():
     global NewDeviceID
@@ -227,10 +227,10 @@ def HeadPhoneCheck():
             for i in [CLK.VOIDPRO_L , CLK.VOIDPRO_R]:
                 ledOn(i, 0, 0, 0, 0.1)
 
-            print("[INFO]" , str(NewDeviceID[HeadPhoneID]) , "Connected")
+            print("[CORSAIR]" , str(NewDeviceID[HeadPhoneID]) , "Connected")
             return
 
-    print("[INFO] No Corsair HeadPhone Found")
+    print("[CORSAIR] No Corsair HeadPhone Found")
 
 
 
@@ -245,4 +245,4 @@ def FirstInit():
     MouseCheck()
     HeadPhoneCheck()
 
-    print("[INFO] Corsair ICUE Init Complete")
+    print("[CORSAIR] Corsair ICUE Init Complete")

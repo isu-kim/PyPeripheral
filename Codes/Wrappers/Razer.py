@@ -2,181 +2,186 @@ import requests
 import json
 import time
 
-global doneInit # for checking if init is done.
 global debug
-
 debug = False
-doneInit = False
-
 
 def debugON():
     global debug
     debug = True
+    if debug:
+        print("[RAZER] Razer SDK Debug Mode On")
+
+def ErrorInfo(errorid):
+    if errorid == -1:
+        print("[RAZER] Error : Invalid ")
+    elif errorid == 5:
+        print("[RAZER] Error : Access Denied")
+    elif errorid == 6:
+        print("[RAZER] Error : Invalid Handle")
+    elif errorid == 50:
+        print("[RAZER] Error : Not Supported")
+    elif errorid == 87:
+        print("[RAZER] Error : Invalid Parameter")
+    elif errorid == 1062:
+        print("[RAZER] Error : Service Not Started")
+    elif errorid == 1167:
+        print("[RAZER] Error : Device Not Connected")
+    elif errorid == 1168:
+        print("[RAZER] Error : Element Not Found")
+    elif errorid == 1235:
+        print("[RAZER] Error : Request Aborted")
+    elif errorid == 1247:
+        print("[RAZER] Error : Already Initialized")
+    elif errorid == 4309:
+        print("[RAZER] Error : Resource Disabled")
+    elif errorid == 4319:
+        print("[RAZER] Error : Device Not Supported or Available.")
+    elif errorid == 5023:
+        print("[RAZER] Error : The Group is in Invalid State")
+    elif errorid == 259:
+        print("[RAZER] Error : No More Items")
+    elif errorid == 2147500037:
+        print("[RAZER] Error : Unexpected Error")
 
 def debugOFF():
     global debug
     debug = False
+    print("[INFO] Razer SDK Debug Mode OFF")
 
-def PostReq(URL , jsondata):
-    global debug
-    Response = requests.post(url = URL , json = jsondata )
-    jsonResult = json.loads(str(Response.text))
 
+def convertHex(R,G,B):
+    #BGR Format
+    Hr = "0x{:02x}".format(R)
+    Hg = "0x{:02x}".format(G)
+    Hb = "0x{:02x}".format(B)
+    BGRVal = int("0x"+str(Hb).replace("0x","")+str(Hg).replace("0x","")+str(Hr).replace("0x","") , 16)
     if debug:
-        print(Response.text)
+        print("[RAZER] Converted RGB : ("+str(R),str(G),str(B)+") to BGR Hex Value " + str("0x"+str(Hb).replace("0x","")+str(Hg).replace("0x","")+str(Hr).replace("0x","")))
 
-    return jsonResult
+    return BGRVal
 
-def KeepAlive():
-    Response = requests.put("http://localhost:54235/razer/chromasdk/heartbeat")
-    print(Response.text)
 
-def init():
-    global doneInit
-    url = "http://localhost:54235/razer/chromasdk/"
-    data = {
+def geturi():
+    global debug
+
+    URL = "http://localhost:54235/razer/chromasdk/"
+    jsondata = {
         "title": 'PyPheperial',
-        "description":  'A Wrapper for PyPheperial',
+        "description": 'A Wrapper for PyPheperial',
         "author": {
-            "name":'Gooday2die',
+            "name": 'Gooday2die',
             "contact": 'github.com/gooday2die/pypheperial'
         },
         "device_supported": ['keyboard', 'mouse', 'mousepad'],
         "category": 'application'
     }
 
-    jsonResult = PostReq(url , data)
+    Response = requests.post(url=URL, json=jsondata)
+    uri = json.loads(Response.text)['uri']
 
-    if jsonResult['sessionid'] != None :
-        print("[INFO] Razer SDK Initialization Success")
-        print("[INFO] Razer SDK Session ID : " + str(jsonResult['sessionid']))
-        doneInit = True
+    if debug:
+        print("[INFO] Razer SDK Rest Session ID : " + str(json.loads(Response.text)['sessionid']))
+        print("[INFO] Razer SDK Rest API URI : " + str(uri))
 
+
+    return uri
+
+
+def createMouseEffect(effectName , r , g ,b , uri):
+    data = {
+            "effect": effectName,
+            "param": {
+                "color": convertHex(r , g ,b)
+            },
+    }
+
+    response = requests.post(url=uri+"/mouse", data=json.dumps(data))
+
+
+    if json.loads(response.text)['result'] == 0:
+        effectid = json.loads(response.text)['id']
+        if debug:
+            print("[RAZER] Successfully Created Mouse Effect ID : "+str(effectid))
+        return effectid
     else:
-        print("[ERROR] Razer SDK Initialization Failed")
-        print("Check If Razer SDK is enabled")
+        ErrorInfo(json.loads(response.text)['result'])
+        print("[RAZER] ERROR in createMouseEffect Function")
 
-
-def MouseSTATICOn():
-    url = "http://localhost:54235/razer/chromasdk/mouse"
-
-
+def createKeyboardEffect(effectName , r , g ,b , uri):
     data = {
-    "effect": "CHROMA_STATIC",
-    "param": {
-        "color": 255
-        },
+            "effect": effectName,
+            "param": {
+                "color": convertHex(r , g ,b)
+            },
     }
 
+    response = requests.post(url=uri+"/keybard", data=json.dumps(data))
 
 
-    PostReq(url , data)
+    if json.loads(response.text)['result'] == 0:
+        effectid = json.loads(response.text)['id']
+        if debug:
+            print("[RAZER] Successfully Created Keyboard Effect ID : "+str(effectid))
+        return effectid
+    else:
+        ErrorInfo(json.loads(response.text)['result'])
+        print("[RAZER] ERROR in createKeyboardEffect Function")
 
-
-
-def MouseLEDOff():
-
-    url = "http://localhost:54235/razer/chromasdk/mouse"
-
+def createMousePadEffect(effectName , r , g ,b , uri):
     data = {
-    "effect": "CHROMA_NONE"
+            "effect": effectName,
+            "param": {
+                "color": convertHex(r , g ,b)
+            },
     }
 
-    PostReq(url , data)
+    response = requests.post(url=uri+"/mousepad", data=json.dumps(data))
 
 
-debugON()
-#init()
+    if json.loads(response.text)['result'] == 0:
+        effectid = json.loads(response.text)['id']
+        if debug:
+            print("[RAZER] Successfully Created Mouse Pad Effect ID : "+str(effectid))
+        return effectid
+    else:
+        ErrorInfo(json.loads(response.text)['result'])
+        print("[RAZER] ERROR in createMousePadEffect Function")
+
+def createHeadsetEffect(effectName , r , g ,b , uri):
+    data = {
+            "effect": effectName,
+            "param": {
+                "color": convertHex(r , g ,b)
+            },
+    }
+
+    response = requests.post(url=uri+"/headset", data=json.dumps(data))
+    if json.loads(response.text)['result'] == 0:
+        effectid = json.loads(response.text)['id']
+        if debug:
+            print("[RAZER] Successfully Created Headset Effect ID : "+str(effectid))
+        return effectid
+    else:
+        ErrorInfo(json.loads(response.text)['result'])
+        print("[RAZER] ERROR in createHeadsetEffect Function")
+
+def setEffect(effectid , uri):
+    data = {
+        "id": str(effectid)
+    }
+
+    response = requests.put(url=uri + "/effect", data=json.dumps(data))
+
+    if json.loads(response.text)['result'] == 0:
+        if debug:
+            print("[RAZER] Successfully Set Effect ID : " + str(effectid))
+    else :
+        ErrorInfo(json.loads(response.text)['result'])
+        print("[RAZER] ERROR in setEffect Function")
 
 
-URL = "http://localhost:54235/razer/chromasdk/"
-jsondata = {
-    "title": 'PyPheperial',
-    "description": 'A Wrapper for PyPheperial',
-    "author": {
-        "name": 'Gooday2die',
-        "contact": 'github.com/gooday2die/pypheperial'
-    },
-    "device_supported": ['keyboard', 'mouse', 'mousepad'],
-    "category": 'application'
-}
+def hearbeat(uri):
+    response = requests.put(url=uri + "/heartbeat", data=None)
+    if debug:
+        print("[RAZER] Heartbeat Tick : " + str(json.loads(response.text)['tick']))
 
-Response = requests.post(url=URL, json=jsondata)
-
-print(Response)
-print(Response.text)
-print(json.loads(Response.text)['uri'])
-uri = json.loads(Response.text)['uri']
-
-
-data = {
-    "effect": "CHROMA_STATIC",
-    "param": {
-        "color": 0xfb
-    },
-}
-
-
-response = requests.post(url = uri+"/mouse" , data = json.dumps(data))
-print(response)
-print(json.loads(response.text))
-effectid = json.loads(response.text)['id']
-
-
-
-
-
-#print(effectid)
-
-
-'''
-response = requests.put(url = uri+"/mouse" , data = json.dumps(data))
-
-print(response)
-print(json.loads(response.text))
-'''
-
-data = {
-    "id" : str(effectid)
-}
-
-response = requests.put(url = uri+"/heartbeat" , data = None)
-print(response)
-print(response.text)
-
-response = requests.put(url = uri+"/heartbeat" , data = None)
-print(response)
-print(response.text)
-
-response = requests.put(url = uri+"/effect" , data = json.dumps(data))
-print("effect " + str(response))
-print(json.loads(response.text))
-time.sleep(1)
-
-
-
-
-
-data = {
-    "effect": "CHROMA_NONE"
-}
-
-
-response = requests.post(url = uri+"/mouse" , data = json.dumps(data))
-print(response)
-print(json.loads(response.text))
-effectid = json.loads(response.text)['id']
-
-
-
-
-data = {
-    "id" : str(effectid)
-}
-
-
-
-response = requests.put(url = uri+"/effect" , data = json.dumps(data))
-print("effect " + str(response))
-print(json.loads(response.text))
-time.sleep(1)

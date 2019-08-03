@@ -1,8 +1,8 @@
 
+
 # PyPheperial
 A program written in python for syncing all the Peripherals connected to computer using SDKs.
 Python Version 3.7
-
 
 ## Basic Info 
 
@@ -38,6 +38,10 @@ for main Corsair ICUE SDK
  [https://github.com/10se1ucgo/cue_sdk](https://github.com/10se1ucgo/cue_sdk)
  for Corsair ICUE SDK wrapping
 
+- requests by psf
+[https://github.com/psf/requests](https://github.com/psf/requests)
+for Razer SDK REST API Wrapping
+
 Massive thanks to those project contributors.
  
  ## Goals
@@ -56,8 +60,9 @@ Massive thanks to those project contributors.
 
 
  - Razer SDK
-Not Started yet
-
+ 50% Complete.
+ Now able to control any LEDs via REST API.
+ Working on key input response.
 - more soon..
 
 ## Supported Devices

@@ -1,5 +1,6 @@
 
 
+
 # PyPheperial
 A program written in python for syncing all the Peripherals connected to computer using SDKs.
 Python Version 3.7
@@ -88,6 +89,12 @@ Image showing all the device's LED colors are synced.
 Image showing two different mouse SDKs are being synced. 
 Sorry for low Quality gif. Had to resize it a bit for me to upload in the github.
 
+![enter image description here](https://github.com/gooday2die/PyPheperial/blob/master/Pics/process.png?raw=true)
+
+Not using that much of resource when executed. Using about 40MB of my ram. And less than 1% of CPU for me.
+Spec :
+CPU : Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
+RAM : 16GB DDR4
 
 ## ETC
 As some of you might know by now, this is my first big project using different libraries and SDKs. 

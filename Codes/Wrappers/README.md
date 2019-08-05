@@ -1,4 +1,5 @@
 
+
 ## Wrappers 
 These codes would be for wrapping SDKs for Python. 
 I will provide some functions definitions for you.
@@ -30,45 +31,59 @@ Device #2 CorsairDeviceInfo(type=<CDT.Mouse: 1>, model='GLAIVE RGB', physicalLay
 Device #3 CorsairDeviceInfo(type=<CDT.Keyboard: 2>, model='K95 RGB PLATINUM', physicalLayout=<CPL.US: 1>, logicalLayout=<CLL.NA: 2>, capsMask=<CDC.Lighting: 1>)
 Device #4 CorsairDeviceInfo(type=<CDT.Headset: 3>, model='VOID PRO USB', physicalLayout=<CPL.Invalid: 0>, logicalLayout=<CLL.Invalid: 0>, capsMask=<CDC.Lighting: 1>)
 
-- **RequestControl(None)**
+ - **RequestControl(None)**
 Send request to ICUE for SDK control. You can just not use this function and set the LED colours, however, it is recommended to use this function before use.
 
-- **ReleaseControl(None)**
+ - **ReleaseControl(None)**
 Releases  control back to ICUE from SDK control. You can just  not use this function and shutdown the program. However, It is recommended to use this function before shutdown for safety.
 
-- **ledOn(LED_ID,RVal,GVal,BVal,Duration)**
+ - **ledOn(LED_ID,RVal,GVal,BVal,Duration)**
 Sets a specific LED as specific RGB Color value. 
 Check [Here](https://github.com/gooday2die/PyPheperial/blob/master/Codes/cue_sdk/enumerations/README.md) for more information regarding LED_IDs. 
 You can set LED_ID as a CLK.Value or just integer. Both would work. Example below.
 >ledOn(CLK.G1,255,0,0,0.2) 
 >Turns G1 Macro key into (255,0,0) Red Colour for 0.2 Sec
 
-- **ledSmoothOn(LED_ID,RVal,GVal,BVal,Duration)**
+ - **ledSmoothOn(LED_ID,RVal,GVal,BVal,Duration)**
 Lights up a specific LED smoothly. It automatically dims after lighting up. Example below.
 > ledSmoothOn(CLK.Escape,255,0,0,0.01)
 > Lights up ESC key into (255,0,0) smoothly for 0.01 smoothness
 
 
-- **BlackLED(LED_ID)**
+ - **BlackLED(LED_ID)**
  Turn off a specific LED. You can perform this just by RGB value 0,0,0 instead. 
 
-- **KeyboardCheck(None)**
+ - **KeyboardCheck(None)**
 Checks the keyboard model and lights green LEDs for success.
 
-- **MouseCheck(None)**
+ - **MouseCheck(None)**
 Checks the mouse model and lights green LEDs for success.
 
-- **MousePadCheck(None)**
+ - **MousePadCheck(None)**
 Checks the mousepad model and lights green LEDs for success.
 
-- **HeadPhoneCheck(None)**
+ - **HeadPhoneCheck(None)**
 Checks the headphone model and lights green LEDs for success.
 
-- **FirstInit(None)**
+ - **FirstInit(None)**
 Checks All the connected devices and requests control over ICUE. 
 
-- **DeviceID(DeviceList)**
+ - **DeviceID(DeviceList)**
 Finds the number that matches the Devices. No need for Devs to control **Serious Spaghetti Code. Do not try to understand the mechanism inside the function :(**. 
+
+ - **KeyboardCol#no(R , G , B , Duration)**
+Sets Colour for specific keyboard Column. Column starts from left to right. Check the Corsair.py for more detailed informations regarding the function. You may switch CLK values for your personal design. There are 22 Columns in K95 RGB.
+
+- **KeyboardSetAll(R , G , B ,  Duration)**
+Sets every key in keyboard as you wish. Since there is no multi-threading enabled at this fuction till yet, the set colour would appear from Column 1 to Column 22. If you want to minimize the delay between keys, set duration to minimum. I suggest using 0.001 for smooth transitions.
+
+- **MM800Col#no(R , G , B , Duration)**
+Sets Colour for specific MM800 Column. Column starts from left to right. Check the Corsair.py for more detailed informations regarding the function. You may switch CLK values for your personal design. There are 7 Columns in MM800RGB.
+
+- **MM800SetAll(R , G , B , Duration)**
+Sets every LED in Mousepad as you wish. No multi-threading enabled at right this moment. So, the set colour would be appearing from Column 1 to Column 7 If you want to minimize the delay between LEDs, set duration to minimum. I suggest using 0.001 for smooth transitions.
+
+
 
 ***
 **Global Variables**

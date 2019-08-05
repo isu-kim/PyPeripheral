@@ -181,8 +181,10 @@ def setEffect(effectid , uri):
         print("[RAZER] ERROR in setEffect Function")
 
 
-def hearbeat(uri):
+def heartbeat(uri):
     response = requests.put(url=uri + "/heartbeat", data=None)
     if debug:
         print("[RAZER] Heartbeat Tick : " + str(json.loads(response.text)['tick']))
 
+
+print(createMouseEffect("CHROMA_STATIC" , 255 , 0 ,0 ,geturi()))

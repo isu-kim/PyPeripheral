@@ -173,6 +173,14 @@ or
 
     setEffect(createMouseEffect("CHROMA_STATIC" . 255 , 0 , 0 , geturi()) , geturi())
 ***
+
+## Mystic Light for MSI
+Now currently working on Mystic Light SDK for MSI GPU LED control. I use RTX 2080 TI Gaming X Trio, which is from MSI. It also supports LED controls using SDKs. So I would be working on the SDK as well for total LED sync. Now have found some documentations from official site and dlls. It would not be taking that much of time for me to complete development since the offered SDK is just one dll file and it is quite straight forward for me. Would be supporting this SDK in the near future.
+
+
+
+
+
 ## Future Developments
 There would be more supported SDKs from Peripheral companies. 
 However, I currently do not have any other devices to test. 

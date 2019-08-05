@@ -13,6 +13,7 @@ Personally I use those Peripherals for my inputs into computer
  - Keyboard : Corsair K95 RGB Platinum
  - Mouse Pad : Corsair MM800 RGB
  - Head Phones : Corsair Void RGB Pro
+ - GPU : RTX 2080 TI Gaming X Trio
  - And more soon...
 
 As you can see, Mouse 1 and all the other devices are using the different programs for their RGB LED controls. Mouse 1 uses Razer SDK for their RGB LED controls. Meanwhile, all the other devices use Corsair ICUE SDK  for their RGB LED controls. 
@@ -63,6 +64,10 @@ Massive thanks to those project contributors.
  50% Complete.
  Now able to control any LEDs via REST API.
  Working on key input response.
+
+- Mystic Light for MSI GPU
+Now working on  it.
+
 - more soon..
 
 ## Supported Devices
@@ -72,6 +77,7 @@ None yet. However, those following devices would be supported for sure.
  - Corsair K95 RGB Platinum [ICUE SDK]
  - Corsair MM800 RGB [ICUE SDK]
  - Corsair Void RGB Pro [ICUE SDK]
+ - RTX 2080 TI MSI  Gaming X Trio[Mystic Light]
 
 
 

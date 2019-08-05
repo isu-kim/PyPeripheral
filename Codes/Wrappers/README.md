@@ -1,5 +1,6 @@
 
 
+
 ## Wrappers 
 These codes would be for wrapping SDKs for Python. 
 I will provide some functions definitions for you.
@@ -99,6 +100,12 @@ For Listing all the connected devices. Do not modify this variable. If modified,
 ## Razer SDK
 I do have Razer DeathAdder Elite Version which supports Chroma SDK so it would work with other devices. However, I cannot assure that your device would work as well. 
 This wrapper took a lot of time for me to develop. As I mentioned before, I am freshmen right now and do not have decent amount of knowledge of RESTful API and HTTP requests. I first was mistaken that URL and URI is same thing but typo :( That made my journey whole worse. I had to get some official examples and reverse engineered it for me to use it in my code. Remember, URL and URI is different thing. Again You can check the full RESTful API from Razer official developer website [here](https://assets.razerzone.com/dev_portal/REST/html/index.html#intro_sec). 
+***
+**Known Bugs**
+When you control mouse LED, Especially when using Death Adder Elite, the LED does mismatch. Upper Scroll bar LED and Logo LED does not have the same colour when it's effect is set.
+
+Also, Note that Razer SDK using REST API is extremely unstable. They have released the full version, and the software I have downloaded was not a Beta version. It does work perfectly for a amount of time. However, after a few days, the software kills itself. REST API server does not respond to the requests we make and refuses to establish connection. If you experience those kind of errors, Please reinstall the program. It will fix the problem.
+
 Before you dive into the Razer SDK, you must know the workflow of SDK.
 ![enter image description here](https://raw.githubusercontent.com/gooday2die/PyPheperial/master/Codes/Wrappers/Razer_SDK_Workflow.png)
 Razer SDK by using RESTful API is done in three major steps. 
@@ -177,6 +184,7 @@ or
 ## Mystic Light for MSI
 Now currently working on Mystic Light SDK for MSI GPU LED control. I use RTX 2080 TI Gaming X Trio, which is from MSI. It also supports LED controls using SDKs. So I would be working on the SDK as well for total LED sync. Now have found some documentations from official site and dlls. It would not be taking that much of time for me to complete development since the offered SDK is just one dll file and it is quite straight forward for me. Would be supporting this SDK in the near future.
 
+#Edited : No, It was not easy at all. The dll file is in 32 bit which is not supported in Python 64 bit. I have to find another Wrapper or other programs for that to happen. Till then, This SDK would be postponed.
 
 
 

@@ -80,6 +80,14 @@ None yet. However, those following devices would be supported for sure.
  - RTX 2080 TI MSI  Gaming X Trio[Mystic Light]
 
 
+## Demo Images
+![enter image description here](https://github.com/gooday2die/PyPheperial/blob/master/Pics/video_0%20%281%29.gif?raw=true)
+Image showing all the device's LED colors are synced.
+
+![enter image description here](https://github.com/gooday2die/PyPheperial/blob/master/Pics/video_1%20%281%29.gif?raw=true)
+Image showing two different mouse SDKs are being synced. 
+Sorry for low Quality gif. Had to resize it a bit for me to upload in the github.
+
 
 ## ETC
 As some of you might know by now, this is my first big project using different libraries and SDKs. 

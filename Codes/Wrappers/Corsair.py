@@ -466,29 +466,29 @@ def KeyboardSetdAll(r,g,b,duration):
     KeyboardCol21(r,g,b,duration)
     KeyboardCol22(r,g,b,duration)
 
-def MM800Row1(r,g,b,duration):
+def MM800Col1(r,g,b,duration):
     ledOn(CLK.MM800_1,r,g,b,duration)
     ledOn(CLK.MM800_2,r,g,b,duration)
     ledOn(CLK.MM800_3,r,g,b,duration)
     ledOn(CLK.MM800_4,r,g,b,duration)
     ledOn(CLK.MM800_5,r,g,b,duration)
 
-def MM800Row2(r,g,b,duration):
+def MM800Col2(r,g,b,duration):
     ledOn(CLK.MM800_6,r,g,b,duration)
 
-def MM800Row3(r,g,b,duration):
+def MM800Col3(r,g,b,duration):
     ledOn(CLK.MM800_7,r,g,b,duration)
 
-def MM800Row4(r,g,b,duration):
+def MM800Col4(r,g,b,duration):
     ledOn(CLK.MM800_8,r,g,b,duration)
 
-def MM800Row5(r,g,b,duration):
+def MM800Col5(r,g,b,duration):
     ledOn(CLK.MM800_9,r,g,b,duration)
 
-def MM800Row6(r,g,b,duration):
+def MM800Col6(r,g,b,duration):
     ledOn(CLK.MM800_10,r,g,b,duration)
 
-def MM800Row7(r,g,b,duration):
+def MM800Col7(r,g,b,duration):
     ledOn(CLK.MM800_11,r,g,b,duration)
     ledOn(CLK.MM800_12,r,g,b,duration)
     ledOn(CLK.MM800_13,r,g,b,duration)
@@ -496,11 +496,11 @@ def MM800Row7(r,g,b,duration):
     ledOn(CLK.MM800_15,r,g,b,duration)
 
 def MM800SetAll(r,g,b,duration):
-    MM800Row1(r,g,b,duration)
-    MM800Row2(r,g,b,duration)
-    MM800Row3(r,g,b,duration)
-    MM800Row4(r,g,b,duration)
-    MM800Row5(r,g,b,duration)
-    MM800Row6(r,g,b,duration)
-    MM800Row7(r,g,b,duration)
+    MM800Col1(r,g,b,duration)
+    MM800Col2(r,g,b,duration)
+    MM800Col3(r,g,b,duration)
+    MM800Col4(r,g,b,duration)
+    MM800Col5(r,g,b,duration)
+    MM800Col6(r,g,b,duration)
+    MM800Col7(r,g,b,duration)
 

@@ -34,7 +34,7 @@ def returnRGB():
 
         for i in range(len(codes)):
             list = []
-            print(int(codes[i][0]))
+            print(int(codes[i][0])) #Comment those print parts for less CPU usage!
             print(int(codes[i][1]))
             print(int(codes[i][2]))
             list.append(int(codes[i][0]))

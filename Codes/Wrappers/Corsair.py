@@ -1,5 +1,6 @@
 from .cue_sdk import *
 import time
+import ctypes
 
 dir_path = str(__file__).replace("Corsair.py", "DLLs/CUESDK.x64_2015.dll")
 print("[INFO] Corsair ICUE DLL Path : " + str(dir_path))
@@ -442,29 +443,14 @@ def KeyboardCol22(r,g,b,duration):
     ledOn(CLK.KeypadPlus, r, g, b , duration)
     ledOn(CLK.KeypadEnter, r, g, b , duration)
 
+def KeyboardCol(index,r,g,b,duration):
+    if debug:
+        print("KeyboardCol"+str(index)+"("+str(r)+","+str(g)+","+str(b)+","+str(duration)+")")
+    exec("KeyboardCol"+str(index)+"("+str(r)+","+str(g)+","+str(b)+","+str(duration)+")")
+
 def KeyboardSetdAll(r,g,b,duration):
-    KeyboardCol1(r,g,b,duration)
-    KeyboardCol2(r,g,b,duration)
-    KeyboardCol3(r,g,b,duration)
-    KeyboardCol4(r,g,b,duration)
-    KeyboardCol5(r,g,b,duration)
-    KeyboardCol6(r,g,b,duration)
-    KeyboardCol7(r,g,b,duration)
-    KeyboardCol8(r,g,b,duration)
-    KeyboardCol9(r,g,b,duration)
-    KeyboardCol10(r,g,b,duration)
-    KeyboardCol11(r,g,b,duration)
-    KeyboardCol12(r,g,b,duration)
-    KeyboardCol13(r,g,b,duration)
-    KeyboardCol14(r,g,b,duration)
-    KeyboardCol15(r,g,b,duration)
-    KeyboardCol16(r,g,b,duration)
-    KeyboardCol17(r,g,b,duration)
-    KeyboardCol18(r,g,b,duration)
-    KeyboardCol19(r,g,b,duration)
-    KeyboardCol20(r,g,b,duration)
-    KeyboardCol21(r,g,b,duration)
-    KeyboardCol22(r,g,b,duration)
+    for i in range(1,23,1):
+        KeyboardCol(i,r,g,b,duration)
 
 def MM800Col1(r,g,b,duration):
     ledOn(CLK.MM800_1,r,g,b,duration)
@@ -495,12 +481,11 @@ def MM800Col7(r,g,b,duration):
     ledOn(CLK.MM800_14,r,g,b,duration)
     ledOn(CLK.MM800_15,r,g,b,duration)
 
-def MM800SetAll(r,g,b,duration):
-    MM800Col1(r,g,b,duration)
-    MM800Col2(r,g,b,duration)
-    MM800Col3(r,g,b,duration)
-    MM800Col4(r,g,b,duration)
-    MM800Col5(r,g,b,duration)
-    MM800Col6(r,g,b,duration)
-    MM800Col7(r,g,b,duration)
+def MM800Col(index,r,g,b,duration):
+    if debug:
+        print("MM800Col"+str(index)+"("+str(r)+","+str(g)+","+str(b)+","+str(duration)+")")
+    exec("MM800Col"+str(index)+"("+str(r)+","+str(g)+","+str(b)+","+str(duration)+")")
 
+def MM800SetAll(r,g,b,duration):
+    for i in range(1,8,1):
+        MM800Col(i,r,g,b,duration)

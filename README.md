@@ -52,6 +52,7 @@ Massive thanks to those project contributors.
  - Sync SDKs
  - Support APIs for other developers in the future,
  - Make GUIs for this program.
+ - Remote Lighting Controls via Socket Communications.
 
 ## Supported SDKs
 
@@ -67,7 +68,7 @@ Massive thanks to those project contributors.
  Working on key input response.
 
 - Mystic Light for MSI GPU
-Now working on  it.
+Now working on  it. Quite Unable to use this API.
 
 - more soon..
 
@@ -88,6 +89,22 @@ Image showing all the device's LED colors are synced.
 ![enter image description here](https://github.com/gooday2die/PyPheperial/blob/master/Pics/video_1%20%281%29.gif?raw=true)
 Image showing two different mouse SDKs are being synced. 
 Sorry for low Quality gif. Had to resize it a bit for me to upload in the github.
+
+![Screen Reactive Demo 1](https://github.com/gooday2die/PyPheperial/blob/master/Pics/demo1.gif?raw=true)
+
+Screen Reactive Demo #1 Night Vision. 
+Might take some time for the gif to load, since the file is huge. 
+
+![Screen Reactive Demo 2](https://github.com/gooday2die/PyPheperial/blob/master/Pics/demo2.gif?raw=true)
+
+Screen Reactive Demo #2 Flash Bang
+
+![Screen Reactive Demo 3](https://github.com/gooday2die/PyPheperial/raw/master/Pics/demo3.gif?raw=true)
+
+Screen Reactive Demo #3 Blood 
+
+For these screen reactive projects, please check [https://github.com/gooday2die/PyPheperial/blob/master/Codes/ScreenReactive.md](https://github.com/gooday2die/PyPheperial/blob/master/Codes/ScreenReactive.md) for more information.
+
 
 ![enter image description here](https://github.com/gooday2die/PyPheperial/blob/master/Pics/process.png?raw=true)
 

@@ -1,16 +1,14 @@
 from Wrappers import Corsair
 from Wrappers import Razer
-import time
+from Communications import ServerSide
+from pathlib import Path
+
+
 import random
 from Wrappers.cue_sdk import *
 
-
-Corsair.RequestControl()
-Corsair.debugOFF()
-
-RazerURI = Razer.geturi()
-Razer.debugOFF()
-
+global server
+server = False
 
 
 
@@ -58,4 +56,60 @@ def randomColors():
             Corsair.ledOn(i , random.randrange(1,256) , random.randrange(1,256) , random.randrange(1,256) , 0.0001)
             Razer.setEffect(Razer.createMouseEffect("CHROMA_STATIC" , random.randrange(1,256) ,random.randrange(1,256) ,random.randrange(1,256) , RazerURI),RazerURI)
 
-RainBowAll(10)
+def serverON():
+    global server
+    server = True
+
+def serverOFF():
+    global server
+    server = False
+
+def checkDevs():
+    Corsair.DeviceInfo()
+    #print(Corsair.DeviceList)
+    print("Please enter device list for your Razer")
+
+def firstinit():
+    print("[INFO] Seems that you are using this program for the first time.")
+    print("[INFO] We would be making a config file together.")
+    print("[INFO] Please check WEBSITE for more information.")
+
+    f = open("Config.txt", "w")
+    Corsair.DeviceInfo()
+    print(Corsair.DeviceList)
+    f.write("CORSAIR_DEV_CNT:"+str(Corsair.DevCount())+"\n")
+    for i in range(int(Corsair.DevCount())):
+        f.write(str(Corsair.DeviceList[i])+"\n")
+
+    f.close()
+
+def mainInit():
+    print("██████╗ ██╗   ██╗██████╗ ██╗  ██╗███████╗██████╗ ███████╗██████╗ ██╗ █████╗ ██╗")
+    print("██╔══██╗╚██╗ ██╔╝██╔══██╗██║  ██║██╔════╝██╔══██╗██╔════╝██╔══██╗██║██╔══██╗██║")
+    print("██████╔╝ ╚████╔╝ ██████╔╝███████║█████╗  ██████╔╝█████╗  ██████╔╝██║███████║██║")
+    print("██╔═══╝   ╚██╔╝  ██╔═══╝ ██╔══██║██╔══╝  ██╔═══╝ ██╔══╝  ██╔══██╗██║██╔══██║██║")
+    print("██║        ██║   ██║     ██║  ██║███████╗██║     ███████╗██║  ██║██║██║  ██║███████╗")
+    print("╚═╝        ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚══════╝")
+    print("                                                                       By Gooday2die")
+    print("                  Please Check My Github : https://github.com/gooday2die/pypheperial")
+    print()
+
+    print("[INFO] Select Operating Mode : ")
+    print("(1) CLI  /  (2) GUI")
+
+    Corsair.RequestControl()
+
+    config_path = Path(str(__file__).replace("Corsair.py", "Config.txt"))
+    if config_path.is_file():
+        print("[INFO] Config File Exists.")
+        firstinit()
+    else:
+        print("[INFO] Config File Does Not Exist.")
+
+    Corsair.debugOFF()
+    Razer.debugOFF()
+
+    Corsair.RequestControl()
+    checkDevs()
+
+mainInit()

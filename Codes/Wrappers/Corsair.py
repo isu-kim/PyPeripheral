@@ -9,6 +9,7 @@ global debug
 global DeviceList
 global NewDeviceID
 global DeviceType
+
 debug = False
 DeviceList = []
 NewDeviceID = []
@@ -22,16 +23,18 @@ def range_float(start, stop, step):
 
 
 def debugON():
-    print("[DEBUG] Debug Enabled.")
+    print("[Info] Corsair ICUE Debug Mode ON")
     global debug
     debug = True
 
 
 def debugOFF():
-    print("[DEBUG] Debug Disabled.")
+    print("[Info] Corsair ICUE Debug Mode OFF")
     global debug
     debug = False
 
+def DevCount():
+    return cue.get_device_count()
 
 def DeviceInfo():
     global DeviceList

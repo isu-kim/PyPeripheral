@@ -144,6 +144,7 @@ class Config:
         f = open("Config.txt", "w")
         f.write("#PyPheperial Config File\n")
         f.write("#Please DO NOT change anything from this file unless you know how it works.\n")
+        f.write("#If you wish to change devices, delete this config. The software would generate a new one for you.\n")
 
         # This file would save the info with this type
         # Example
@@ -179,29 +180,29 @@ class Config:
         global mainDebug
         f = open("Config.txt", "r")
         lines = f.readlines()
-        # Line 2 : Mouse / 3 : Keyboard / 4 : Mousepad / 5 : Headset / 6 : ETC
+        # Line 3 : Mouse / 4 : Keyboard / 5 : Mousepad / 6 : Headset / 7 : ETC
 
-        MOUSE = [x.strip() for x in lines[2].replace("MOUSE=", "").split(',')]
+        MOUSE = [x.strip() for x in lines[3].replace("MOUSE=", "").split(',')]
         if mainDebug:
             print("[DEBUG] Mouse : ", end="")
             print(MOUSE)
 
-        KEYBOARD = [x.strip() for x in lines[3].replace("KEYBOARD=", "").split(',')]
+        KEYBOARD = [x.strip() for x in lines[4].replace("KEYBOARD=", "").split(',')]
         if mainDebug:
             print("[DEBUG] Keyboard : ", end="")
             print(KEYBOARD)
 
-        MOUSEPAD = [x.strip() for x in lines[4].replace("MOUSEPAD=", "").split(',')]
+        MOUSEPAD = [x.strip() for x in lines[5].replace("MOUSEPAD=", "").split(',')]
         if mainDebug:
             print("[DEBUG] Mouse Pad : ", end="")
             print(MOUSEPAD)
 
-        HEADSET = [x.strip() for x in lines[5].replace("HEADSET=", "").split(',')]
+        HEADSET = [x.strip() for x in lines[6].replace("HEADSET=", "").split(',')]
         if mainDebug:
             print("[DEBUG] Head Set : ", end="")
             print(HEADSET)
 
-        ETC = [x.strip() for x in lines[6].replace("ETC=", "").split(',')]
+        ETC = [x.strip() for x in lines[7].replace("ETC=", "").split(',')]
         if mainDebug:
             print("[DEBUG] ETC : ", end="")
             print(ETC)
@@ -555,6 +556,8 @@ def mainInit():
 
     if isFirstRun():
         firstinit()
+        config = Config()
+        config.read()
 
     else:
         print("[INFO] Welcome Back!")

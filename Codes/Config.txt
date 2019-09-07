@@ -1,0 +1,8 @@
+#PyPheperial Config File
+#Please DO NOT change anything from this file unless you know how it works.
+MOUSE=RAZER,CORSAIR
+KEYBOARD=CORSAIR
+MOUSEPAD=CORSAIR
+HEADSET=CORSAIR
+ETC=CORSAIR
+EOF

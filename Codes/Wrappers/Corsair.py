@@ -71,7 +71,7 @@ def ledOn(LED_ID, RVal, GVal, BVal, Duration):
               str(Duration))
     led_color = CorsairLedColor(LED_ID, RVal, GVal, BVal)
     cue.set_led_colors(led_color)
-    time.sleep(Duration)
+    time.sleep(Duration) #for immediate action, set duration to 0 , think duration as delay
 
 
 def ledSmoothOn(LED_ID, RVal, GVal, BVal, Duration):

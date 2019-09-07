@@ -115,25 +115,6 @@ Spec :
 CPU : Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
 RAM : 16GB DDR4
 
-## Update Log , Comments
-I would be posting update logs here in order for people and me to understand what is going on from September 2019. Before September, all the update logs "can" be found by using Github's commitment history system, which is not suggested. I would be posting some personal comments about the project going on. There might be jokes, do not take these too seriously. :)
-
-**2019.09.05**
-*Update Logs :* 
-*Working on Config files for multiple use. 
-Added Basic GUI Module.* 
-
-*Personal Comments:*
-For Config files, I would be just using simple text files. I do not want my program to find all the connected devices every time they run. It is way less effective. Corsair Does support connected device list, however, Razer does not. To make things worse, it even does not return values if the effect setting was physically valid. 
-
-I do not have any experience with GUI, So I might not be able to make something fancy. Would try my best for the design. I will keep everything straight forward as much as possible. However, I am just an Computer Science and Engineering student who is never familiar with Arts and Design... (Never got better than grade C. Back in high school, my art teacher got surprised of the result of my work. Of course in bad way.)
-
-Also, personally, a new semester had begun. That would make me study useless subjects that would never help me out with my life. Those subjects would take time from me coding. I hate those.
-
-I am kind of having difficulties in developing this program in Python. There are toooooooo many limits by using Python than the comfort of using Python. I thought there might have been some more good modules that would help me out with this project. However, the reality was cruel. Seriously, who uses Python for hardware control? All the SDKs that are provided by the Manufacturers are written in C++ or C#. So I am planning to learn C++ and implement this whole project to that language. Might need some time for me to learn C++ skills. I would miss my PyCharm...
-
-Lastly, there had been someone who just sent me an email regarding this project. That guy offered me test support using his devices. That was nice of him. I just wanted to reply the email. However, I was not able. I have sent my email from two different email service providers, however, I was not able to send that at all. Outlook just failed. If you are seeing this text, I am sorry for my late reply.
-
 
 ## ETC
 As some of you might know by now, this is my first big project using different libraries and SDKs. 

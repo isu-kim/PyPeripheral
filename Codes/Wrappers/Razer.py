@@ -1,10 +1,9 @@
 import json
 import requests
 
-import time
-
 global debug
 debug = False
+
 
 def debugON():
     global debug
@@ -87,7 +86,6 @@ def geturi():
 
     return uri
 
-
 def createMouseEffect(effectName , r , g ,b , uri):
     data = {
             "effect": effectName,
@@ -95,18 +93,21 @@ def createMouseEffect(effectName , r , g ,b , uri):
                 "color": convertHex(r , g ,b)
             },
     }
+    try:
+        response = requests.post(url=uri+"/mouse", data=json.dumps(data))
+        if json.loads(response.text)['result'] == 0:
+            effectid = json.loads(response.text)['id']
+            if debug:
+                print("[RAZER] Successfully Created Mouse Effect ID : " + str(effectid))
+            return effectid
+        else:
+            ErrorInfo(json.loads(response.text)['result'])
+            print("[RAZER] ERROR in createMouseEffect Function")
+    except TypeError:
+        print("[RAZER] ERROR in createMouseEffect Function , Device does not seem to exist")
+        return None
 
-    response = requests.post(url=uri+"/mouse", data=json.dumps(data))
 
-
-    if json.loads(response.text)['result'] == 0:
-        effectid = json.loads(response.text)['id']
-        if debug:
-            print("[RAZER] Successfully Created Mouse Effect ID : "+str(effectid))
-        return effectid
-    else:
-        ErrorInfo(json.loads(response.text)['result'])
-        print("[RAZER] ERROR in createMouseEffect Function")
 
 def createKeyboardEffect(effectName , r , g ,b , uri):
     data = {
@@ -115,18 +116,22 @@ def createKeyboardEffect(effectName , r , g ,b , uri):
                 "color": convertHex(r , g ,b)
             },
     }
+    try:
+        response = requests.post(url=uri+"/keyboard", data=json.dumps(data))
+        if json.loads(response.text)['result'] == 0:
+            effectid = json.loads(response.text)['id']
+            if debug:
+                print("[RAZER] Successfully Created Keyboard Effect ID : "+str(effectid))
+            return effectid
+        else:
+            ErrorInfo(json.loads(response.text)['result'])
+            print("[RAZER] ERROR in createKeyboardEffect Function")
 
-    response = requests.post(url=uri+"/keybard", data=json.dumps(data))
+    except TypeError:
+        print("[RAZER] ERROR in createKeyboardEffect Function , Device does not seem to exist")
+        return None
 
 
-    if json.loads(response.text)['result'] == 0:
-        effectid = json.loads(response.text)['id']
-        if debug:
-            print("[RAZER] Successfully Created Keyboard Effect ID : "+str(effectid))
-        return effectid
-    else:
-        ErrorInfo(json.loads(response.text)['result'])
-        print("[RAZER] ERROR in createKeyboardEffect Function")
 
 def createMousePadEffect(effectName , r , g ,b , uri):
     data = {
@@ -135,18 +140,21 @@ def createMousePadEffect(effectName , r , g ,b , uri):
                 "color": convertHex(r , g ,b)
             },
     }
+    try:
+        response = requests.post(url=uri+"/mousepad", data=json.dumps(data))
+        if json.loads(response.text)['result'] == 0:
+            effectid = json.loads(response.text)['id']
+            if debug:
+                print("[RAZER] Successfully Created Mouse Pad Effect ID : " + str(effectid))
+            return effectid
+        else:
+            ErrorInfo(json.loads(response.text)['result'])
+            print("[RAZER] ERROR in createMousePadEffect Function")
+    except TypeError:
+        print("[RAZER] ERROR in createMousePadEffect Function , Device does not seem to exist")
+        return None
 
-    response = requests.post(url=uri+"/mousepad", data=json.dumps(data))
 
-
-    if json.loads(response.text)['result'] == 0:
-        effectid = json.loads(response.text)['id']
-        if debug:
-            print("[RAZER] Successfully Created Mouse Pad Effect ID : "+str(effectid))
-        return effectid
-    else:
-        ErrorInfo(json.loads(response.text)['result'])
-        print("[RAZER] ERROR in createMousePadEffect Function")
 
 def createHeadsetEffect(effectName , r , g ,b , uri):
     data = {
@@ -155,36 +163,64 @@ def createHeadsetEffect(effectName , r , g ,b , uri):
                 "color": convertHex(r , g ,b)
             },
     }
+    try:
+        response = requests.post(url=uri+"/headset", data=json.dumps(data))
+        if json.loads(response.text)['result'] == 0:
+            effectid = json.loads(response.text)['id']
+            if debug:
+                print("[RAZER] Successfully Created Headset Effect ID : " + str(effectid))
+            return effectid
+        else:
+            ErrorInfo(json.loads(response.text)['result'])
+            print("[RAZER] ERROR in createHeadsetEffect Function")
+    except TypeError:
+        print("[RAZER] ERROR in createHeadsetEffect Function , Device does not seem to exist")
+        return None
 
-    response = requests.post(url=uri+"/headset", data=json.dumps(data))
-    if json.loads(response.text)['result'] == 0:
-        effectid = json.loads(response.text)['id']
-        if debug:
-            print("[RAZER] Successfully Created Headset Effect ID : "+str(effectid))
-        return effectid
-    else:
-        ErrorInfo(json.loads(response.text)['result'])
-        print("[RAZER] ERROR in createHeadsetEffect Function")
+def createETCEffect(effectName , r , g ,b , uri):
+    data = {
+            "effect": effectName,
+            "param": {
+                "color": convertHex(r , g ,b)
+            },
+    }
+    try:
+        response = requests.post(url=uri+"/chromalink", data=json.dumps(data))
+        if json.loads(response.text)['result'] == 0:
+            effectid = json.loads(response.text)['id']
+            if debug:
+                print("[RAZER] Successfully Created ETC Effect ID : " + str(effectid))
+            return effectid
+        else:
+            ErrorInfo(json.loads(response.text)['result'])
+            print("[RAZER] ERROR in createETCEffect Function")
+    except TypeError:
+        print("[RAZER] ERROR in createETCEffect Function , Device does not seem to exist")
+        return None
+
 
 def setEffect(effectid , uri):
+    if effectid == None:
+        print("[RAZER] Effect ID invalid : " + str(effectid))
+        return
+
     data = {
         "id": str(effectid)
     }
-
     response = requests.put(url=uri + "/effect", data=json.dumps(data))
-
+    if debug:
+        print(json.loads(response.text)['result']) # 0 means success
     if json.loads(response.text)['result'] == 0:
         if debug:
             print("[RAZER] Successfully Set Effect ID : " + str(effectid))
-    else :
+        return True #returns true if setting effect was successful.
+    else:
         ErrorInfo(json.loads(response.text)['result'])
         print("[RAZER] ERROR in setEffect Function")
-
+        return False #returns false if setting effect was failure
 
 def heartbeat(uri):
     response = requests.put(url=uri + "/heartbeat", data=None)
     if debug:
         print("[RAZER] Heartbeat Tick : " + str(json.loads(response.text)['tick']))
 
-
-print(createMouseEffect("CHROMA_STATIC" , 255 , 0 ,0 ,geturi()))

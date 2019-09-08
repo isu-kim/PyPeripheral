@@ -2,7 +2,7 @@ from collections import namedtuple
 from ctypes import Structure, c_int, c_char_p, c_double, c_bool, POINTER
 from operator import attrgetter
 
-from .enumerations import CDT, CPL, CLL, CDC, CLK
+from .enumerations import CLK , CLM , CLH , CLMM, CLHSS,CLD
 
 __all__ = ['CorsairDeviceInfo', 'CorsairLedPosition', 'CorsairLedPositions',
            'CorsairLedColor', 'CorsairProtocolDetails']
@@ -146,7 +146,7 @@ class CorsairLedColor(Structure):
             g (int): Green component value
             b (int): You guessed it! Blue component value
         """
-        led_id = led_id.value if isinstance(led_id, CLK) else led_id
+        led_id = led_id.value if (isinstance(led_id, CLK) or isinstance(led_id, CLM) or isinstance(led_id, CLH) or isinstance(led_id, CLHSS) or isinstance(led_id, CLMM) or isinstance(led_id, CLD)) else led_id
         super(CorsairLedColor, self).__init__(led_id, r, g, b)
 
 

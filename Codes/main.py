@@ -69,7 +69,13 @@ class TEST:
             color.headset(random.randrange(1, 256), random.randrange(1, 256), random.randrange(1, 256),RazerURI,0)
             color.etc(random.randrange(1, 256), random.randrange(1, 256), random.randrange(1, 256),RazerURI,0)
 
-
+    def gloweffectTest(self):
+        glow = GlowKeys()
+        glow.all(255,255,255,0.01,0.005)
+        glow.all(255,0,0,0.01,0.005)
+        glow.all(0,255,0,0.01,0.005)
+        glow.all(0,0,255,0.01,0.005)
+        glow.all(255,255,255,0.01,0.005)
 
 class setCOLOR:
     '''
@@ -652,30 +658,4 @@ if __name__ == '__main__':
 
     color = setCOLOR()
 
-    #test.RainBowAll()
-
-
-    #Corsair.ledOn(CLK.K95G1,255,255,255,0)
-
-    #ssleep(10)
-    color.mouse(255,255,255,RazerURI,0)
-    color.headset(255,255,255,RazerURI,0)
-    color.mousepad(255,255,255,RazerURI,0)
-    color.keyboard(255,255,255,RazerURI,0)
-    #sleep(10)
-
-
-    #SetAllColor(255,0,255,0)
-
-    #sleep(3)
-
-    while True:
-        glow.all(255,255,255,0.01,0.005)
-        glow.all(255,0,0,0.01,0.005)
-        glow.all(0,255,0,0.01,0.005)
-        glow.all(0,0,255,0.01,0.005)
-        glow.all(255,255,255,0.01,0.005)
-
-    #test.randomColors()
-
-    sleep(4)
+    #test.gloweffectTest()

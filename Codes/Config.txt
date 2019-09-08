@@ -1,8 +1,10 @@
 #PyPheperial Config File
 #Please DO NOT change anything from this file unless you know how it works.
-MOUSE=RAZER,CORSAIR
+#If you wish to change devices, delete this config. The software would generate a new one for you.
+MOUSE=CORSAIR,RAZER
 KEYBOARD=CORSAIR
 MOUSEPAD=CORSAIR
 HEADSET=CORSAIR
+HEADSETSTAND=CORSAIR
 ETC=CORSAIR
 EOF

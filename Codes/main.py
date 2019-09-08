@@ -3,9 +3,6 @@ from Wrappers import Razer
 from Communications import ServerSide
 from pathlib import Path
 from time import sleep
-from threading import Thread
-
-
 import random
 from Wrappers.cue_sdk import *
 
@@ -24,6 +21,7 @@ class DEVLIST:
         self.mouse = None
         self.mousepad = None
         self.headset = None
+        self.headsetstand = None
         self.etc = None
         self.sdks = []
 
@@ -32,17 +30,20 @@ class SDKS:
     def __init__(self):
         self.Razer = None
         self.Corsair = None
+
         self.RazerMouse = None
         self.RazerKeybd = None
         self.RazerMousePD = None
         self.RazerHeadSet = None
+        self.RazerHeadSetStand = None
         self.RazerETC = None
+
         self.CorsairMouse = None
         self.CorsairKeybd = None
         self.CorsairMousePD = None
         self.CorsairHeadSet = None
+        self.CorsairHeadSetStand = None
         self.CorsairETC = None
-
 
 class TEST:
     '''
@@ -86,9 +87,13 @@ class setCOLOR:
             Razer.setEffect(EffectID, RazerURI)
 
         if SDKS.CorsairMouse:
-            Corsair.ledOn(CLK.GLAV_1, r, g, b, Duration)
-            Corsair.ledOn(CLK.GLAV_2, r, g, b, Duration)
-            Corsair.ledOn(CLK.GLAV_3, r, g, b, Duration)
+            Corsair.ledOn(CLM.Z1, r, g, b, Duration)
+            Corsair.ledOn(CLM.Z2, r, g, b, Duration)
+            Corsair.ledOn(CLM.Z3, r, g, b, Duration)
+            Corsair.ledOn(CLM.Z4, r, g, b, Duration)
+            Corsair.ledOn(CLM.Z5, r, g, b, Duration)
+            Corsair.ledOn(CLM.Z6, r, g, b, Duration)
+
 
     def keyboard(self, r, g, b, RazerURI, Duration):
         if SDKS.RazerKeybd:
@@ -97,13 +102,12 @@ class setCOLOR:
 
         if SDKS.CorsairKeybd:
 
-            exceptList = [148 , 149 , 150 , 151 , #Mouse
-                          189 , 148 , 149 , #Mouse
+            exceptList = [148 , 149 , 150 , 151 ,189 , 190 , #Mouse
                           155 , 156 , 157 , 158 , 159 , 160 , 161 , 162 , 163, 164, 165, 166 , 167 , 168 , 169, #mousepad
-                          152 , 153 #HeadSet
+                          152 , 153 ,#HeadSet
                           ]
 
-            for i in range(200):
+            for i in range(191):
                 if i not in exceptList:
                     Corsair.ledOn(i , r, g, b, Duration)
 
@@ -113,17 +117,46 @@ class setCOLOR:
             Razer.setEffect(EffectID, RazerURI)
 
         if SDKS.CorsairMousePD:
-            for i in range (155,170,1):
-                Corsair.ledOn(i, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone1, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone2, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone3, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone4, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone5, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone6, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone7, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone8, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone9, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone10, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone11, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone12, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone13, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone14, r, g, b, Duration)
+            Corsair.ledOn(CLMM.Zone15, r, g, b, Duration)
 
     def headset(self, r, g, b, RazerURI, Duration):
         if SDKS.CorsairHeadSet:
-            Corsair.ledOn(CLK.VOIDPRO_R, r, g, b, Duration)
-            Corsair.ledOn(CLK.VOIDPRO_L, r, g, b, Duration)
+            Corsair.ledOn(CLH.LeftLogo, r, g, b, Duration)
+            Corsair.ledOn(CLH.RightLogo, r, g, b, Duration)
 
         if SDKS.RazerHeadSet:
             EffectID = Razer.createHeadsetEffect("CHROMA_STATIC", r, g, b, RazerURI)
             Razer.setEffect(EffectID, RazerURI)
+
+    def headsetstand(self,r,g,b,RazerURI,Duration):
+        if SDKS.CorsairHeadSetStand:
+            Corsair.ledOn(CLHSS.Zone1,r,g,b,Duration)
+            Corsair.ledOn(CLHSS.Zone2,r,g,b,Duration)
+            Corsair.ledOn(CLHSS.Zone3,r,g,b,Duration)
+            Corsair.ledOn(CLHSS.Zone4,r,g,b,Duration)
+            Corsair.ledOn(CLHSS.Zone5,r,g,b,Duration)
+            Corsair.ledOn(CLHSS.Zone6,r,g,b,Duration)
+            Corsair.ledOn(CLHSS.Zone7,r,g,b,Duration)
+            Corsair.ledOn(CLHSS.Zone8,r,g,b,Duration)
+            Corsair.ledOn(CLHSS.Zone9,r,g,b,Duration)
+
+        if SDKS.RazerHeadSetStand:
+            EffectID = Razer.createETCEffect("CHROMA_STATIC",r,g,b,RazerURI)
+            Razer.setEffect(EffectID,RazerURI)
 
     def etc(self, r, g, b, RazerURI, Duration):
         if SDKS.RazerETC:
@@ -131,7 +164,7 @@ class setCOLOR:
             Razer.setEffect(EffectID, RazerURI)
 
         if SDKS.CorsairETC:
-            for i in range(500): # I do not know the maximum number. So, this might not be a optimal one.
+            for i in range(191,500,1): # Check Wrappers/Corsair/cue_sdk/enumerations.py for more information.
                 Corsair.ledOn(i, r, g, b, Duration)
 
 class Config:
@@ -163,12 +196,14 @@ class Config:
         keyboard = input("[INFO] Keyboard : ")
         mousepad = input("[INFO] Mouse Pad : ")
         headset = input("[INFO] Headset : ")
+        headsetstand = input("[INFO] Headset Stand : ")
         etc = input("[INFO] ETC : ")
 
         f.write("MOUSE=" + str(mouse) + "\n")
         f.write("KEYBOARD=" + str(keyboard) + "\n")
         f.write("MOUSEPAD=" + str(mousepad) + "\n")
         f.write("HEADSET=" + str(headset) + "\n")
+        f.write("HEADSETSTAND="+str(headsetstand)+"\n")
         f.write("ETC=" + str(etc) + "\n")
         f.write("EOF\n")
 
@@ -180,7 +215,7 @@ class Config:
         global mainDebug
         f = open("Config.txt", "r")
         lines = f.readlines()
-        # Line 3 : Mouse / 4 : Keyboard / 5 : Mousepad / 6 : Headset / 7 : ETC
+        # Line 3 : Mouse / 4 : Keyboard / 5 : Mousepad / 6 : Headset / 7 : Headset Stand / 8 : Etc
 
         MOUSE = [x.strip() for x in lines[3].replace("MOUSE=", "").split(',')]
         if mainDebug:
@@ -202,7 +237,12 @@ class Config:
             print("[DEBUG] Head Set : ", end="")
             print(HEADSET)
 
-        ETC = [x.strip() for x in lines[7].replace("ETC=", "").split(',')]
+        HEADSETSTAND = [x.strip() for x in lines[6].replace("HEADSETSTAND=", "").split(',')]
+        if mainDebug:
+            print("[DEBUG] Head Set Stand : ", end="")
+            print(HEADSETSTAND)
+
+        ETC = [x.strip() for x in lines[8].replace("ETC=", "").split(',')]
         if mainDebug:
             print("[DEBUG] ETC : ", end="")
             print(ETC)
@@ -211,6 +251,7 @@ class Config:
         DEVLIST.keyboard = KEYBOARD
         DEVLIST.mousepad = MOUSEPAD
         DEVLIST.headset = HEADSET
+        DEVLIST.headsetstand = HEADSETSTAND
         DEVLIST.etc = ETC
 
         return DEVLIST
@@ -273,6 +314,9 @@ class SDKops:
         for i in range(len(DEVLIST.headset)):
             dump.append(DEVLIST.headset[i])
 
+        for i in range(len(DEVLIST.headsetstand)):
+            dump.append(DEVLIST.headsetstand[i])
+
         if mainDebug:
             print(dump)
             print(len(list(dict.fromkeys(dump))))
@@ -286,6 +330,7 @@ class SDKops:
         SDKS.RazerKeybd = False
         SDKS.RazerHeadSet = False
         SDKS.RazerMousePD = False
+        SDKS.RazerHeadSetStand = False
         SDKS.RazerETC = False
 
         SDKS.Corsair = False
@@ -293,6 +338,7 @@ class SDKops:
         SDKS.CorsairKeybd = False
         SDKS.CorsairMousePD = False
         SDKS.CorsairHeadSet = False
+        SDKS.CorsairHeadSetStand = False
         SDKS.CorsairETC = False
 
     def SDKInits(self, DEVLIST):
@@ -322,6 +368,9 @@ class SDKops:
             if "RAZER" in DEVLIST.mousepad:
                 SDKS.RazerMousePD = True
 
+            if "RAZER" in DEVLIST.headsetstand:
+                SDKS.RazerHeadSetStand = True
+
             if "RAZER" in DEVLIST.etc:
                 SDKS.RazerETC = True
 
@@ -342,12 +391,16 @@ class SDKops:
             if "CORSAIR" in DEVLIST.mousepad:
                 SDKS.CorsairMousePD = True
 
+            if "CORSAIR" in DEVLIST.headsetstand:
+                SDKS.CorsairHeadSetStand = True
+
             if "CORSAIR" in DEVLIST.etc:
                 SDKS.CorsairETC = True
 
-        else:
-            print("[ERROR] Sorry, Only Razer and Corsair devices are supported right now. ")
-            return
+        if ("CORSAIR" not in DEVLIST.sdks) and ("RAZER" not in DEVLIST.sdks):
+            print("[INFO] No Supported SDKs found. Only Razer and Corsair are supported right now.")
+            print("[INFO] Exiting Program ...")
+            exit(0)
 
         if mainDebug:
             print(vars(SDKS))
@@ -429,6 +482,7 @@ class GlowKeys:
         if mainDebug:
             print("[INFO] Glow headset set : " + str(r) + "," + str(g) + "," + str(b) + " ")
 
+
     def etc(self,r,g,b,step,duration):
         etc = ETCfuncs()
         color = setCOLOR()
@@ -457,6 +511,7 @@ class GlowKeys:
             color.mouse(NRval, NGval, NBval, RazerURI, 0)
             color.mousepad(NRval, NGval, NBval, RazerURI, 0)
             color.headset(NRval, NGval, NBval, RazerURI, 0)
+            color.headsetstand(NRval, NGval, NBval, RazerURI, 0)
             color.etc(NRval, NGval, NBval, RazerURI, 0)
 
             sleep(duration)
@@ -547,6 +602,7 @@ def mainInit():
     print("██╔═══╝   ╚██╔╝  ██╔═══╝ ██╔══██║██╔══╝  ██╔═══╝ ██╔══╝  ██╔══██╗██║██╔══██║██║")
     print("██║        ██║   ██║     ██║  ██║███████╗██║     ███████╗██║  ██║██║██║  ██║███████╗")
     print("╚═╝        ╚═╝   ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚══════╝")
+    print("                                                                         Version 0.1")
     print("                                                                       By Gooday2die")
     print("                  Please Check My Github : https://github.com/gooday2die/pypheperial")
     print()
@@ -587,24 +643,38 @@ def SetAllColor(r,g,b,duration):
 
 
 if __name__ == '__main__':
-    Debug = Debug()
-    Debug.ON
+    RazerURI = None
+    DEbug = Debug()
+    DEbug.OFF()
     mainInit()
     glow = GlowKeys()
     test = TEST()
 
     color = setCOLOR()
 
+    #test.RainBowAll()
 
-    SetAllColor(255,0,255,0)
 
-    sleep(3)
+    #Corsair.ledOn(CLK.K95G1,255,255,255,0)
 
-    glow.all(255,255,255,0.01,0.005)
-    glow.all(255,0,0,0.01,0.005)
-    glow.all(0,255,0,0.01,0.005)
-    glow.all(0,0,255,0.01,0.005)
-    glow.all(255,255,255,0.01,0.005)
+    #ssleep(10)
+    color.mouse(255,255,255,RazerURI,0)
+    color.headset(255,255,255,RazerURI,0)
+    color.mousepad(255,255,255,RazerURI,0)
+    color.keyboard(255,255,255,RazerURI,0)
+    #sleep(10)
+
+
+    #SetAllColor(255,0,255,0)
+
+    #sleep(3)
+
+    while True:
+        glow.all(255,255,255,0.01,0.005)
+        glow.all(255,0,0,0.01,0.005)
+        glow.all(0,255,0,0.01,0.005)
+        glow.all(0,0,255,0.01,0.005)
+        glow.all(255,255,255,0.01,0.005)
 
     #test.randomColors()
 

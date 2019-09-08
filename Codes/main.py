@@ -648,6 +648,7 @@ def SetAllColor(r,g,b,duration):
     Color.etc(r,g,b,RazerURI,duration)
 
 
+'''
 if __name__ == '__main__':
     RazerURI = None
     DEbug = Debug()
@@ -659,3 +660,12 @@ if __name__ == '__main__':
     color = setCOLOR()
 
     #test.gloweffectTest()
+'''
+
+RazerURI = None
+DEbug = Debug()
+DEbug.OFF()
+mainInit()
+glow = GlowKeys()
+test = TEST()
+color = setCOLOR()

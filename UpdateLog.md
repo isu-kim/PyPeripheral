@@ -41,3 +41,34 @@ Classes.
 That is the main update of this project. Although I am still working on turning this project into OOP based project, some of major things are already shifted to OOP Classes. Actually, to be honest, I did not know how to use Classes. That was the main thing that I had not used a single Class in my project, which was kind of dumb. Now I know how to use Classes a little bit in order to organize all the functions and variables neatly for myself and others as well.
 
 Now working on Tkinter for GUIs. As I have mentioned up above, I am a seriously bad designer. I had never developed GUIs at all. Personally, I am more used to CLI environment. This would make some think that I am just a geek (Joking). So, If there are someone with Tkinter skills, please let me know. I need some of your help with this project. I can develop GUIs in slower pace, however, I have bunch of other things to do with this project; SDK Wrapping, Reactive keys, and other things. 
+***
+**2019.09.14**
+
+ - Source Code optimization.
+ - Working on Mystic Light  (MSI)
+ - Working on Reactive Keys
+
+***Personal Comments***
+Sorry for no updates for a while. I have been going to school right now to study some things that would be not of a help for my entire life. It has been Korean Thanks Giving holiday for about 2 days till now and 2 days to go. 
+
+I have been working on MSI Mystic Light and I am quite done with it. No, not in the positive way. In a negative way. There are some things that are getting in my way for developing Mystic Light SDK for Python.
+
+1. Shitty Documentation. 
+2. Almost impossible for Python Wrapping.
+3. 32bit only DLLs.
+4. Lack of C++ skills.
+
+
+Their documentation is almost no help at all. There are some function details, however it is almost not a help at all. I am pretty sure that they even did not know what they were making at the first place. No explanation of the variable types, no example for their codes, not a single help from them.
+
+I had been almost doing everything I can and I came to conclusion that wrapping this into Python module is almost impossible (at least for me). The dll they provided was 32bit based, which is kind of not a definitely a good thing for developers nowadays. 
+
+The python version that this project had been developing was based on 64bit version. Not 32bit version. It is possible for me to get that dll working by using [msl-loadlib](https://github.com/MSLNZ/msl-loadlib) . I full saw the dll working at the moment right now. However, the things are more quite complicated right after this process is done.
+
+As some of you know, the data types between C(++) and Python is different in terms of a lot of things. C is kind of more low-level based data types. However, Python is more of a high-level based data types (actually there is not a term in Python for data types.
+
+For example, in this dll for Mystic Light, there is a Structure called "SAFEARRAY" which is not supported in python. Also, I have tried to make this structure in python for this thing to get working. However, there has to be a difference between the real one and Python one since it is written in different language. For example, structure of SAFEARRAY contains SAFEARRAYBOUND which should be created as a structure(class) for Python. Also, SAFEARRAYBOUND is connected to something called LPSAFEARRAYBOUND. If you solve a question there is another one to solve. which is kind of impossible for me to implement this feature to Python .
+
+The last thing is that I am almost unable to use C++. It would be just great for me to turn this whole project into C++ . However, I lack so much C++ skills. It took about 2 days for me to include SDK header files into my project. However, it is not working at all. 
+
+I will keep trying for myself and everyone who would be using this program in the future.

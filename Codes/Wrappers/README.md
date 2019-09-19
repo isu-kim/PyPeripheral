@@ -1,12 +1,26 @@
 
 
 
+
 ## Wrappers 
 These codes would be for wrapping SDKs for Python. 
 I will provide some functions definitions for you.
 
 ## Corsair SDK
 Since most of my personal devices are Corsair, I am more into ICUE Wrapping and those kind of things. 
+***
+**Basic Knowledge for Corsair ICUE Wrapper**
+There had been quite a change since I had first developed Corsair ICUE Wrapper for the first time. Also, there are some important things for who would be using this program in the future. In this section, I would be posting some information regarding the basics of Corsair ICUE, and how it works.
+
+- Basic Workflow
+The basic Workflow of Corsair ICUE SDK is quite simple. We load DLL to this script ( is done automatically ) and it 's almost halfway done. Then we set specific LED ID to specific LED colour. 
+
+- Terms
+There are some official terms from Corsair ICUE SDK. Those are CLK , CLM ,  CLMM , CLHSS , CLH , CLD. Each stands for LED ID ; Keyboard , Mouse , Mouse Mat , Headset Stand , Headset , DIY. CLD has two channels; channel 1 and 2. DIY Channel is for those not listed up above. Such as Corsair RGB LED fans. Unfortunately, I personally do not possess any Corsair DIY Devices, so I am quite unable to test them out myself. However, someone else told me that it is working.
+
+
+
+
 ***
 **Functions Available**
 
@@ -75,16 +89,16 @@ Finds the number that matches the Devices. No need for Devs to control **Serious
  - **KeyboardCol#no(R , G , B , Duration)**
 Sets Colour for specific keyboard Column. Column starts from left to right. Check the Corsair.py for more detailed informations regarding the function. You may switch CLK values for your personal design. There are 22 Columns in K95 RGB.
 
-- **KeyboardSetAll(R , G , B ,  Duration)**
+ - **KeyboardSetAll(R , G , B ,  Duration)**
 Sets every key in keyboard as you wish. Since there is no multi-threading enabled at this fuction till yet, the set colour would appear from Column 1 to Column 22. If you want to minimize the delay between keys, set duration to minimum. I suggest using 0.001 for smooth transitions.
 
-- **MM800Col#no(R , G , B , Duration)**
+ - **MM800Col#no(R , G , B , Duration)**
 Sets Colour for specific MM800 Column. Column starts from left to right. Check the Corsair.py for more detailed informations regarding the function. You may switch CLK values for your personal design. There are 7 Columns in MM800RGB.
 
-- **MM800SetAll(R , G , B , Duration)**
+ - **MM800SetAll(R , G , B , Duration)**
 Sets every LED in Mousepad as you wish. No multi-threading enabled at right this moment. So, the set colour would be appearing from Column 1 to Column 7 If you want to minimize the delay between LEDs, set duration to minimum. I suggest using 0.001 for smooth transitions.
 
-
+ 
 
 ***
 **Global Variables**

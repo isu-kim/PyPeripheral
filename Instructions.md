@@ -19,13 +19,13 @@ PIL is not able to install via pip anymore, so please use Pillow instead.
 For REST API control in using Razer SDK.
 
 Please Install those dependecncies before using this program.
-After installing those dependencies, run demo files. (Rainbow,py and screenreactive.py are some demo files). If you can successfully run those two scripts, you can pretty much use all the functions that I have provided. Otherwise, please check Errors and report them to me if you cannot solve them yourself. Also, This script is confirmed running on Python 3.7.4, I highly recommend you using 3.7.4 for best performance. Also, Python below 3.0 might not be able to run this script.
+After installing those dependencies, run demo files. (Rainbow,py and screenreactive.py are some demo files). If you can successfully run those two scripts, you can pretty much use all the functions that I have provided. Otherwise, please check Errors and report them to me if you cannot solve them yourself. Also, This script is confirmed running on Python 3.7.4, I highly recommend you using 3.7.4 for best performance. Also, Python below 3.0 might not be able to run this script. Also, be sure to use Python 3.7.4 64bit.
 
 ## Non-Programmer
 For Non-programmer and those who have no knowledge regarding Python, this is the right instruction for you. As this project PyPheperial reads, this project is written in Python language. In order for you to run all those fancy stuff,, you should install Python itself, and some other programs in order for this script to run. **Please  note that this program is not perfect at all means. This might have a lot of bugs, and even can be unable to run on your PC.** 
 
 **Step 1. Installing Python.**
-Visit [https://www.python.org/downloads/](https://www.python.org/downloads/) in order for you to download Python. I would highly recommend you downloading **version 3.7.4**. Especially versions below 3.0 might not be able to run this script at all. **Please install python with default settings, since it is best for beginners to use.**
+Visit [https://www.python.org/downloads/](https://www.python.org/downloads/) in order for you to download Python. I would highly recommend you downloading **version 3.7.4**. Especially versions below 3.0 might not be able to run this script at all. **Please install python with default settings, since it is best for beginners to use.  Also, be sure to use Python 3.7.4 64bit.**
 
 **Step 2. Checking Python**
 Please go and cmd (yeah that black background with white texts). Enter the code below.

@@ -1,6 +1,5 @@
 from Wrappers import Corsair
 from Wrappers import Razer
-from Communications import ServerSide
 from pathlib import Path
 from time import sleep
 import random

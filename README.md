@@ -126,4 +126,4 @@ I would like to thank all those who have visited this repository. Thanks.
 
 Starting 2019/07/27
 
-
++ I would be making the codes become more clear for everyone to read by using PEP8 style. Sorry, I was too busy...

@@ -3,7 +3,8 @@ from Wrappers import Razer
 from pathlib import Path
 from time import sleep
 import random
-from Wrappers.cue_sdk import *
+from cue_sdk import *
+
 
 '''
 Now Re-editing for PEP8 Style and more class based.

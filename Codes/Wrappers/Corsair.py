@@ -1,5 +1,5 @@
-from .cue_sdk import *
 import time
+from cue_sdk import *
 
 dir_path = str(__file__).replace("Corsair.py", "DLLs/CUESDK.x64_2015.dll")
 print("[INFO] Corsair ICUE DLL Path : " + str(dir_path))

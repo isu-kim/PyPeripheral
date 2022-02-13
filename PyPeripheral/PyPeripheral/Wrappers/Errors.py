@@ -14,7 +14,14 @@ class CorsairRGBSetError(Exception):
     pass
 
 
-class NotInstalledSDKError(Exception):
+class RazerRGBSetError(Exception):
+    """
+    An Error class for generating RGB effects with Razer SDK
+    """
+    pass
+
+
+class CannotConnectSDKError(Exception):
     """
     An Error class for SDK not installed.
     """

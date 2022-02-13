@@ -79,13 +79,10 @@ e.set_rgb(rgb_value)
 ## Wrapper Abstraction Class Guide
 Wrapper Abstraction Class is located as `Wrappers.abstractSDK.py` . This is an abstraction class that provides rough idea and guide for new Wrapper classes to be implemented into this library. If you would like to implement a SDK with your own style of code, make a child class with parent as `abstractSDK.SDK()`. Override each corresponding methods as its features. 
 ### 1. Connection
- `def connect(self)` : This is a method for connecting our Python library into SDK. When implementing this method, the method should be able to connect and check connection with SDKs. If it is not possible to connect SDKs, it is recommended to `raise` errors or exceptions. 
+ `def connect(self)` : This is a method for connecting our Python library into SDK. When implementing this method, the method should be able to connect and check connection with SDKs. Also this method is meant to let SDKs know that our Python Library would be using the SDK features. If it is not possible to connect or request control over SDKs, it is recommended to `raise` errors or exceptions. 
  - **Returns**: None
  - **Params**: None
-### 2. Using SDK
-`def use(self)` : This is a method for letting SDKs know that our Python Library would be using the SDK features. This method is meant to request control over SDK. If it is not possible to request control over SDK, it is recommended to `raise` errors or exceptions.
- - **Returns**: None
- - **Params**: None
+
 ### 3. Disabling SDK
 `def disable(self)` : This is a method for letting SDK know that our Python Library finished using SDK. This method is meant to release control over SDK. This method should be called before exiting the program. There are some SDKs which require manual releasing after using the SDK. For example, Corsair's ICUE SDK would not automatically release itself for a certain amount of time if not released manually. If it is not possible to release control over SDK, it is recommended to `raise` errors or exceptions.
  - **Returns**: None

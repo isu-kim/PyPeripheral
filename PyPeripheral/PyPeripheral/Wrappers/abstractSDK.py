@@ -23,16 +23,6 @@ class SDK:
         pass
 
     @abstractmethod
-    def use(self):
-        """
-        An abstract method for using specific SDK.
-        This method should "request" control over RGB devices of a certain SDK.
-        For example, Corsair's 'use' method would perform "request_control" over ICUE SDK.
-        :return: returns None
-        """
-        pass
-
-    @abstractmethod
     def disable(self):
         """
         An abstract method for disabling a specific SDK.

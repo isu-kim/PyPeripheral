@@ -23,12 +23,6 @@ class SDK (abstractSDK.SDK):
         :return: returns None
         """
         self.corsair_object.connect()
-
-    def use(self):
-        """
-        A use method for Corsair ICUE SDK
-        :return: returns None
-        """
         self.corsair_object.request_control()
 
     def disable(self):
@@ -49,7 +43,7 @@ class SDK (abstractSDK.SDK):
 
         for i in range(device_count):
             cur_device_info = self.corsair_object.get_device_info(i)
-            device_type = self.get_enum_values(cur_device_info.type.value)
+            device_type = self.__get_enum_values(cur_device_info.type.value)
             device_name = cur_device_info.model
             self.all_devices[device_type] = (device_name, i)
 
@@ -63,12 +57,12 @@ class SDK (abstractSDK.SDK):
         """
         try:
             cur_device_info = self.corsair_object.get_device_info(index)
-            return self.get_enum_values(cur_device_info.type.value), cur_device_info.model
+            return self.__get_enum_values(cur_device_info.type.value), cur_device_info.model
         except ValueError:
             raise Errors.InvalidDeviceIndexError("Invalid device index : " + str(index))
 
     @staticmethod
-    def get_enum_values(enum_value):
+    def __get_enum_values(enum_value):
         """
         A method for getting names of device type by enum values.
         The enums are located at enums.py from cuesdk

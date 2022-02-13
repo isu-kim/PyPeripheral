@@ -9,7 +9,7 @@ setup(
     author_email='edina00@naver.com',
     license='MIT',
     packages=['PyPeripheral'],
-    install_requires=['cuesdk', 'requests'],
+    install_requires=['cuesdk', 'requests==2.21.0'],
     classifiers=[
         'Programming Language :: Python :: 3.8',
         'Environment :: Win32 (MS Windows)',

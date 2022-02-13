@@ -181,10 +181,13 @@ class SDK(abstractSDK.SDK):
                     effect_id = requests.post(cur_url, data=json.dumps(data))
                     effect_id = json.loads(effect_id.text)['id']
                     effect_id_list.append(effect_id)
+                except requests.exceptions.MissingSchema:
+                    raise Errors.RazerRGBSetError("Cannot set effect. Perhaps you did not use connect method before")
                 except ValueError:  # when the value had some wrong values. raise InvalidRgbValue Error.
                     raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
                 except KeyError:  # when the effect id was not generated
                     raise Errors.RazerRGBSetError("Cannot generate effect")
+
 
         url = self.uri + "/effect"
         data = {

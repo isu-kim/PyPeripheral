@@ -9,8 +9,8 @@ import ctypes
 
 import cuesdk
 
-from PyPeripheral.PyPeripheral.Wrappers import abstractSDK
-from PyPeripheral.PyPeripheral.Wrappers import Errors
+from PyPeripheral.Wrappers import abstractSDK
+from PyPeripheral.Wrappers import Errors
 
 
 class SDK(abstractSDK.SDK):

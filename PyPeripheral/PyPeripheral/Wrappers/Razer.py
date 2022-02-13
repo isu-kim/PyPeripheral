@@ -12,8 +12,8 @@ import time
 
 import requests
 
-from PyPeripheral.PyPeripheral.Wrappers import abstractSDK
-from PyPeripheral.PyPeripheral.Wrappers import Errors
+from PyPeripheral.Wrappers import abstractSDK
+from PyPeripheral.Wrappers import Errors
 
 
 def put_heart_beat(uri):

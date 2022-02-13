@@ -11,7 +11,7 @@ import scipy.cluster
 import mss
 from PIL import Image
 
-from PyPeripheral.PyPeripheral.Wrappers import All
+from PyPeripheral.Wrappers import All
 
 
 def return_rgb():

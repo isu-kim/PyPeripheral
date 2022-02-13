@@ -6,11 +6,11 @@
 """
 
 
-from PyPeripheral.PyPeripheral.Wrappers import abstractSDK
-from PyPeripheral.PyPeripheral.Wrappers import Errors
+from PyPeripheral.Wrappers import abstractSDK
+from PyPeripheral.Wrappers import Errors
 
-from PyPeripheral.PyPeripheral.Wrappers import Corsair
-from PyPeripheral.PyPeripheral.Wrappers import Razer
+from PyPeripheral.Wrappers import Corsair
+from PyPeripheral.Wrappers import Razer
 
 
 class SDK(abstractSDK.SDK):

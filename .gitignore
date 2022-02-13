@@ -1,3 +1,6 @@
 .idea/
 venv/
 __pycache__
+PyPeripheral/dist
+PyPeripheral/PyPeripheral.egg-info
+PyPeripheral/test.py

@@ -5,7 +5,7 @@
 @file : $NAME.py
 """
 
-from PyPeripheral.Wrappers import All
+from PyPeripheral import All
 
 
 def rainbow_all(step):

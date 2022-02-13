@@ -3,11 +3,8 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import random
-import multiprocessing
 
-from PyPeripheral.Wrappers import Corsair
-from PyPeripheral.Wrappers import Razer
-from PyPeripheral.Wrappers import All
+from PyPeripheral import All
 
 if __name__ == "__main__":
     a = All.SDK()

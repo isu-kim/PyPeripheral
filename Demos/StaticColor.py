@@ -5,7 +5,8 @@
 @file : $NAME.py
 """
 
-from PyPeripheral.Wrappers import All
+from PyPeripheral import All
+
 
 def static_color(r, g, b):
     """

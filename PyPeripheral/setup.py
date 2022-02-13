@@ -10,7 +10,7 @@ from setuptools import setup
 
 setup(
     name='PyPeripheral',
-    version='0.1.0',
+    version='0.1.1',
     description='A RGB Controlling Library for Python',
     url='https://github.com/gooday2die/PyPeripheral',
     author='Gooday2die',

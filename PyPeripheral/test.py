@@ -12,7 +12,6 @@ if __name__ == "__main__":
     c.connect()
     c.use()
     print(c.get_all_device_information())
-    print(c.get_device_information(1))
-    c.set_rgb({"MouseMat": (255, 255, 0)})
+    c.set_rgb({"Mouse": (255, 255, 0)})
     time.sleep(100)
     c.disable()

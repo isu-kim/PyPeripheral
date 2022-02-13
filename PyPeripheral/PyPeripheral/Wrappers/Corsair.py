@@ -2,8 +2,8 @@ import ctypes
 
 import cuesdk
 
-from PyPeripheral.Wrappers import abstractSDK
-from PyPeripheral.Wrappers import Errors
+from PyPeripheral.PyPeripheral.Wrappers import abstractSDK
+from PyPeripheral.PyPeripheral.Wrappers import Errors
 
 
 class SDK (abstractSDK.SDK):
@@ -61,8 +61,11 @@ class SDK (abstractSDK.SDK):
         :param index: the index of device to get information
         :return: returns Device Information object.
         """
-        cur_device_info = self.corsair_object.get_device_info(index)
-        return self.get_enum_values(cur_device_info.type.value), cur_device_info.model
+        try:
+            cur_device_info = self.corsair_object.get_device_info(index)
+            return self.get_enum_values(cur_device_info.type.value), cur_device_info.model
+        except ValueError:
+            raise Errors.InvalidDeviceIndexError("Invalid device index : " + str(index))
 
     @staticmethod
     def get_enum_values(enum_value):
@@ -111,6 +114,39 @@ class SDK (abstractSDK.SDK):
             if device_type == "MouseMat":
                 self.__set_rgb_mouse_mat(values)
 
+            elif device_type == "Mouse":
+                self.__set_rgb_mouse(values)
+
+            elif device_type == "Keyboard":
+                self.__set_rgb_keyboard(values)
+
+            elif device_type == "Headset":
+                self.__set_rgb_headset(values)
+
+            elif device_type == "HeadsetStand":
+                self.__set_rgb_headset_stand(values)
+
+            elif device_type == "Cooler":
+                self.__set_rgb_cooler(values)
+
+            elif device_type == "MemoryModule":
+                self.__set_rgb_memory_module(values)
+
+            elif device_type == "Motherboard":
+                self.__set_rgb_motherboard(values)
+
+            elif device_type == "GPU":
+                self.__set_rgb_gpu(values)
+
+            elif device_type == "ETC":
+                self.__set_rgb_etc(values)
+
+            elif device_type == "ALL":
+                self.__set_rgb_all(values)
+
+            else:
+                raise Errors.InvalidDeviceTypeError("Invalid device type name : " + device_type)
+
         # Using set_led_colors_flush_buffer_async raises an error which is Argument Error.
         # ctypes.ArgumentError: argument 1: <class 'TypeError'>: expected CFunctionType instance instead of NoneType
         # So in this script, we are using set_led_colors_flush_buffer instead.
@@ -123,12 +159,236 @@ class SDK (abstractSDK.SDK):
     def __set_rgb_mouse_mat(self, values):
         """
         A method that sets all rgb values of mouse mat.
+        Following enums are for MouseMat LEDs
+
+        MM_Zone1 ~ MM_Zone15 = 155 ~ 169
+
+        Checked with MM800RGB
         :param values: tuple type of rgb values
         :return: returns None
         """
+        device_index = self.all_devices["MouseMat"][1]
         try:  # try setting values using for loop
-            for i in range(155, 170):  # from 155 ~ 169 is mouse_mat values
-                self.corsair_object.set_led_colors_buffer_by_device_index(0, {i: values})
+            for i in range(155, 170):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
                 # using original enum values instead of enum itself for loops
         except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
-            raise Errors.InvalidRgbValue("RGB Value : " + str(values) + " is invalid RGB Value")
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_mouse(self, values):
+        """
+        A method that sets all rgb values of a mouse.
+        Following enums are for Mouse LEDs
+
+        M_1 ~ M_4 = 148 ~ 151
+        M_5 ~ M_6 = 189 ~ 190
+        M_7 ~ M_20 = 1694 ~ 1707
+
+        Checked with GLAIVE RGB
+
+        :param values: tuple type of rgb values
+        :return: returns None
+
+        """
+        device_index = self.all_devices["Mouse"][1]
+        try:  # try setting values using for loop
+            for i in range(148, 152):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+
+            self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {189: values})
+            self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {190: values})
+
+            for i in range(1694, 1708):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_keyboard(self, values):
+        """
+        A method that sets all rgb values of keyboard.
+        Following enums are for Keyboard LEDs
+
+        Keyboard Values : 1 ~ 147
+        K_Logo = 154
+        K_Profile = 1543
+        KLP_Zone1 ~ KLP_Zone19 = 170 ~ 188
+        KLP_Zone20 ~ KLP_Zone50 = 1512 ~ 1542
+
+        Could not check with keyboards yet.
+        :param values: tuple type of rgb values
+        :return: returns None
+        """
+        device_index = self.all_devices["Keyboard"][1]
+        try:  # try setting values using for loop
+            for i in range(1, 148):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+                # using original enum values instead of enum itself for loops
+            self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {154: values})
+            self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {1543: values})
+            for i in range(170, 189):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+            for i in range(1512, 1543):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_headset(self, values):
+        """
+        A method that sets all rgb values of headset.
+        Following enums are for Headset LEDs
+
+        H_LeftLogo = 152
+        H_RightLogo = 153
+
+        Could not check with Headset yet.
+        :param values: tuple type of rgb values
+        :return: returns None
+        """
+        device_index = self.all_devices["Headset"][1]
+        try:  # try setting values using for loop
+            self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {152: values})
+            self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {153: values})
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_headset_stand(self, values):
+        """
+        A method that sets all rgb values of headset stand.
+        Following enums are for Headset Stand LEDs
+
+        HSS_Zone1 ~ HSS_Zone9 = 191 ~ 199
+
+        Could not check with keyboards yet.
+        :param values: tuple type of rgb values
+        :return: returns None
+        """
+        device_index = self.all_devices["HeadsetStand"][1]
+        try:  # try setting values using for loop
+            for i in range(191, 200):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_memory_module(self, values):
+        """
+        A method that sets all rgb values of MemoryModule led.
+        Following enums are for MemoryModule LEDs
+
+        DRAM_1 ~ DRAM_12 = 600 ~ 611
+
+        Could not check with keyboards yet.
+        :param values: tuple type of rgb values
+        :return: returns None
+        """
+
+        device_index = self.all_devices["MemoryModule"][1]
+        try:  # try setting values using for loop
+            for i in range(600, 612):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_cooler(self, values):
+        """
+        A method that sets all rgb values of Cooler led.
+        Following enums are for Cooler LEDs
+        I am not 100% sure about all the enums, but I am guessing
+        D_C1_1 and those looking like in the same format would be coolers.
+        If I get updates on which enums are coolers, I will update the code.
+
+        D_C1_1 ~ D_C2_150 = 200 ~ 499
+        D_C3_1 ~ D_C3_300 = 612 ~ 1361
+
+        Could not check with Cooler yet.
+        :param values: tuple type of rgb values
+        :return: returns None
+        """
+
+        device_index = self.all_devices["Cooler"][1]
+        try:  # try setting values using for loop
+            for i in range(200, 500):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+            for i in range(612, 1362):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_motherboard(self, values):
+        """
+        A method that sets all rgb values of Motherboard led.
+        Following enums are for Motherboard LEDs
+
+        MB_Zone1 ~ MB_Zone100 = 1362 ~ 1461
+
+        Could not check with Motherboard yet.
+        :param values: tuple type of rgb values
+        :return: returns None
+        """
+
+        device_index = self.all_devices["Motherboard"][1]
+        try:  # try setting values using for loop
+            for i in range(1362, 1462):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_gpu(self, values):
+        """
+        A method that sets all rgb values of GPU led.
+        Following enums are for GPU LEDs
+
+        GPU_Zone1 ~ GPU_Zone50 = 1462 ~ 1511
+
+        Could not check with GPU yet.
+        :param values: tuple type of rgb values
+        :return: returns None
+        """
+
+        device_index = self.all_devices["GPU"][1]
+        try:  # try setting values using for loop
+            for i in range(1462, 1512):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_etc(self, values):
+        """
+        A method that sets all rgb values of etc led.
+        Following enums are for etc LEDs
+
+        Oem1 ~ Oem100 = 500 ~ 599
+        Oem101 ~ Oem250 = 1544 ~ 1693
+
+        Could not check with GPU yet.
+        :param values: tuple type of rgb values
+        :return: returns None
+        """
+
+        device_index = self.all_devices["GPU"][1]
+        try:  # try setting values using for loop
+            for i in range(500, 600):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+            for i in range(1544, 1694):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __set_rgb_all(self, values):
+        """
+        A method that sets all rgb values of all Corsair led.
+
+        The enums of Corsair LEDs start from 1 to 1707
+
+        :param values: tuple type of rgb values
+        :return: returns None
+        """
+
+        device_index = 0
+        try:  # try setting values using for loop
+            for i in range(1, 1707):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+            for i in range(1544, 1694):
+                self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
+        except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
+            raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")

@@ -1,6 +1,5 @@
-import ctypes
-
-import cuesdk
+import json
+import requests
 
 from PyPeripheral.PyPeripheral.Wrappers import abstractSDK
 from PyPeripheral.PyPeripheral.Wrappers import Errors
@@ -8,13 +7,29 @@ from PyPeripheral.PyPeripheral.Wrappers import Errors
 
 class SDK (abstractSDK.SDK):
     """
-    A class for implementing wrapper class for Corsair ICUE
+    A class for implementing wrapper class for Razer SDK
     """
     def __init__(self):
         """
         An initializer method for Corsair ICUE SDK
         """
-        self.corsair_object = cuesdk.CueSdk()
+
+        url = "http://localhost:54235/razer/chromasdk/"
+        jsondata = {
+            "title": 'PyPheperial',
+            "description": 'A Wrapper for PyPheperial',
+            "author": {
+                "name": 'Gooday2die',
+                "contact": 'github.com/gooday2die/pypheperial'
+            },
+            "device_supported": ['keyboard', 'mouse', 'mousepad'],
+            "category": 'application'
+        }
+
+        response = requests.post(url=url, json=jsondata)
+        uri = json.loads(response.text)['uri']
+
+        self.uri = uri
         self.all_devices = None
 
     def connect(self):
@@ -155,6 +170,23 @@ class SDK (abstractSDK.SDK):
             # self.corsair_object.set_led_colors_flush_buffer_async()
         except ctypes.ArgumentError:
             raise Errors.CorsairRGBSetError("Cannot set RGB values: " + str(self.corsair_object.get_last_error()))
+
+    @staticmethod
+    def __convert_hex(r, g, b):
+        """
+        A method that converts RGB value into BGR format in hex
+        :param r: red value
+        :param g: green value
+        :param b: blue value
+        :return: returns converted BGR value of RGB
+        """
+        # BGR Format
+        hr = "0x{:02x}".format(r)
+        hg = "0x{:02x}".format(g)
+        hb = "0x{:02x}".format(b)
+        bgr_val = int("0x" + str(hb).replace("0x", "") + str(hg).replace("0x", "") + str(hr).replace("0x", ""), 16)
+
+        return bgr_val
 
     def __set_rgb_mouse_mat(self, values):
         """

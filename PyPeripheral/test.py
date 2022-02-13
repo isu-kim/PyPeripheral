@@ -2,23 +2,37 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-import time
+import random
+import multiprocessing
 
 from PyPeripheral.Wrappers import Corsair
 from PyPeripheral.Wrappers import Razer
-
+from PyPeripheral.Wrappers import All
 
 if __name__ == "__main__":
-    #c = Corsair.SDK()
-    #c.connect()
-    #c.use()
-    #print(c.get_all_device_information())
-    #c.set_rgb({"Mouse": (255, 255, 0)})
-    #time.sleep(100)
-    #c.disable()
-    r = Razer.SDK()
-    r.connect()
-    r.disable()
-    #r.get_device_information(1)
-    r.set_rgb({"ALL": (255, 255, 0)})
-    
+    a = All.SDK()
+    a.connect()
+
+    """
+    while True:
+        for i in range(1, 255, 3):
+            c.set_rgb({"ALL": (i, 0, 0)})
+            r.set_rgb({"ALL": (i, 0, 0)})
+
+        for i in range(1, 255, 3):
+            c.set_rgb({"ALL": (255 - i, i, 0)})
+            r.set_rgb({"ALL": (255 - i, i, 0)})
+
+        for i in range(1, 255, 3):
+            c.set_rgb({"ALL": (0, 255 - i, i)})
+            r.set_rgb({"ALL": (0, 255 - i, i)})
+
+        for i in range(1, 255, 3):
+            c.set_rgb({"ALL": (i, 0, 255 - i)})
+            r.set_rgb({"ALL": (i, 0, 255 - i )})
+    """
+    while True:
+        red = random.randrange(0, 255, 1)
+        g = random.randrange(0, 255, 1)
+        b = random.randrange(0, 255, 1)
+        a.set_rgb({"ALL": (red, g, b)})

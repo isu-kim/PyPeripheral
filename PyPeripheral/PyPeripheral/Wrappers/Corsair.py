@@ -1,3 +1,10 @@
+"""
+@project : PyPeripheral
+@author : Gooday2die
+@date : 2022-02-13
+@file : Corsair.py
+"""
+
 import ctypes
 
 import cuesdk
@@ -6,10 +13,11 @@ from PyPeripheral.PyPeripheral.Wrappers import abstractSDK
 from PyPeripheral.PyPeripheral.Wrappers import Errors
 
 
-class SDK (abstractSDK.SDK):
+class SDK(abstractSDK.SDK):
     """
     A class for implementing wrapper class for Corsair ICUE
     """
+
     def __init__(self):
         """
         An initializer method for Corsair ICUE SDK
@@ -22,8 +30,11 @@ class SDK (abstractSDK.SDK):
         A connect method for Corsair ICUE SDK
         :return: returns None
         """
-        self.corsair_object.connect()
-        self.corsair_object.request_control()
+        try:
+            self.corsair_object.connect()
+            self.corsair_object.request_control()
+        except:
+            raise Errors.CorsairSDKInitFailError
 
     def disable(self):
         """

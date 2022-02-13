@@ -1,3 +1,11 @@
+"""
+@project : PyPeripheral
+@author : Gooday2die
+@date : 2022-02-13
+@file : Errors.py
+"""
+
+
 class InvalidRgbValueError(Exception):
     """
     An Error class for Invalid RGB Values.
@@ -21,7 +29,14 @@ class RazerRGBSetError(Exception):
     pass
 
 
-class CannotConnectSDKError(Exception):
+class CorsairSDKInitFailError(Exception):
+    """
+    An Error class for SDK not installed.
+    """
+    pass
+
+
+class RazerSDKInitFailError(Exception):
     """
     An Error class for SDK not installed.
     """

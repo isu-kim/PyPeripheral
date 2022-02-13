@@ -1,13 +1,16 @@
+"""
+@project : PyPeripheral
+@author : Gooday2die
+@date : 2022-02-13
+@file : Razer.py
+"""
+
+
 import json
 import multiprocessing
 import time
 
 import requests
-import usb
-
-import win32com.client
-
-
 
 from PyPeripheral.PyPeripheral.Wrappers import abstractSDK
 from PyPeripheral.PyPeripheral.Wrappers import Errors
@@ -67,10 +70,10 @@ class SDK(abstractSDK.SDK):
                 self.heart_beat_thread = multiprocessing.Process(target=put_heart_beat, kwargs={"uri": self.uri})
                 self.heart_beat_thread.start()  # start heartbeat thread
             except KeyError:
-                raise Errors.CannotConnectSDKError("Cannot retrieve URI from Razer SDK")
+                raise Errors.RazerSDKInitFailError("Cannot retrieve URI from Razer SDK")
 
         except requests.exceptions.ConnectionError:  # When the library cannot connect Razer SDK.
-            raise Errors.CannotConnectSDKError("Cannot connect Razer SDK. "
+            raise Errors.RazerSDKInitFailError("Cannot connect Razer SDK. "
                                                "Please check if you have installed Chroma Connect")
 
     def disable(self):

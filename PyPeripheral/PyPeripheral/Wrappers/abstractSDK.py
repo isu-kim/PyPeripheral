@@ -1,3 +1,10 @@
+"""
+@project : PyPeripheral
+@author : Gooday2die
+@file : abstractSDK.py
+@date : 2022-02-13
+"""
+
 from abc import abstractmethod, ABCMeta
 
 

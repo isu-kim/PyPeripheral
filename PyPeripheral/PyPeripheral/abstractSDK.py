@@ -71,3 +71,14 @@ class SDK:
         :return: returns True if successful, and False if failure.
         """
         pass
+
+    @abstractmethod
+    def __repr__(self):
+        """
+        A __repr__ method for this class.
+        Should return in following format
+        SDKNAME SDK
+
+        Example: Corsair SDK / Razer SDK
+        """
+        pass

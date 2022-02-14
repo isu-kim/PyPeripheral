@@ -48,8 +48,11 @@ class SDK(abstractSDK.SDK):
         Thus this method is invalid in this SDK.
         :return: returns dictionary object of all device information
         """
+        all_devices = dict()
         for sdk in self.sdk_list:
-            sdk.get_all_device_information()
+            all_devices[str(sdk)] = sdk.get_all_device_information()
+
+        return all_devices
 
     def get_device_information(self, index):
         """
@@ -74,3 +77,9 @@ class SDK(abstractSDK.SDK):
         """
         for sdk in self.sdk_list:
             sdk.set_rgb(rgb_info)
+
+    def __repr__(self):
+        """
+        A __repr__ method for this class
+        """
+        return "All SDK"

@@ -2,13 +2,15 @@
 @project : PyPeripheral
 @author : Gooday2die
 @date : 2022-02-13
-@file : $NAME.py
+@file : RainbowAll.py
 """
 
 from PyPeripheral import All
-import asyncio
 
-async def rainbow_all(step, sdk_object):
+
+def rainbow_all(step):
+    sdk_object = All.SDK()
+    sdk_object.connect()
     """
     Function for Setting all the keys rainbow shift.
     step is the parameter for how fast the rainbow should shift.
@@ -34,6 +36,4 @@ async def rainbow_all(step, sdk_object):
 
 
 if __name__ == '__main__':
-    sdk_object = All.SDK()
-    sdk_object.connect()
-    asyncio.run(rainbow_all(10, sdk_object))
+    rainbow_all(10)

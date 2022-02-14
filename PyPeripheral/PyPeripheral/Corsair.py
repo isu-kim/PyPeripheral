@@ -397,3 +397,9 @@ class SDK(abstractSDK.SDK):
                 self.corsair_object.set_led_colors_buffer_by_device_index(device_index, {i: values})
         except TypeError:  # when the value had some wrong values. raise InvalidRgbValue Error.
             raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
+
+    def __repr__(self):
+        """
+        A __repr__ method for this class
+        """
+        return "Corsair SDK"

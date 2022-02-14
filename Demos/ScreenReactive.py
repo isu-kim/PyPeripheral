@@ -10,7 +10,6 @@ import numpy as np
 import scipy.cluster
 import mss
 from PIL import Image
-import asyncio
 
 from PyPeripheral import All
 
@@ -45,13 +44,14 @@ def return_rgb():
         return lst
 
 
-async def screen_reactive(sdk_object):
+def screen_reactive():
+    sdk_object = All.SDK()
+    sdk_object.connect()
     while True:
         new_list = return_rgb()
         sdk_object.set_rgb({"ALL": (new_list[0], new_list[1], new_list[2])})
 
 
 if __name__ == '__main__':
-    sdk_object = All.SDK()
-    sdk_object.connect()
-    asyncio.run(screen_reactive(sdk_object))
+    screen_reactive()
+

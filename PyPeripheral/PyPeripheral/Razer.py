@@ -71,6 +71,8 @@ class SDK(abstractSDK.SDK):
                 self.heart_beat_thread.start()  # start heartbeat thread
             except KeyError:
                 raise Errors.RazerSDKInitFailError("Cannot retrieve URI from Razer SDK")
+            except TypeError:
+                raise Errors.RazerSDKInitFailError("Cannot retrieve URI from Razer SDK")
 
         except requests.exceptions.ConnectionError:  # When the library cannot connect Razer SDK.
             raise Errors.RazerSDKInitFailError("Cannot connect Razer SDK. "
@@ -216,3 +218,9 @@ class SDK(abstractSDK.SDK):
         bgr_val = int("0x" + str(hb).replace("0x", "") + str(hg).replace("0x", "") + str(hr).replace("0x", ""), 16)
 
         return bgr_val
+
+    def __repr__(self):
+        """
+        A __repr__ method for this class
+        """
+        return "Razer SDK"

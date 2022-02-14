@@ -4,10 +4,10 @@ This directory is for demonstration of the library. Currently there are followin
 - Rainbow All
 - Static Color
 ### Please choose one of following
-- [I know Python or Programming!](##%20I%20know%20Python%20or%20Programming!)
-- [Nope I do not know any Programming...](##%20Nope...%20I%20do%20not%20know%20Python...)
+- [I know Python or Programming!](## Programmers)
+- [Nope I do not know any Programming...](## Non-Programmers.)
 
-## I know Python or Programming!
+## Programmers
 
 ### Screen Reactive
 This demo reacts to the most dominant color of the screen. Then sets all device's LED into the dominant color. [Someone from Stackoverflow](https://stackoverflow.com/questions/3241929/python-find-dominant-most-common-color-in-an-image) got me Idea of this demo. 
@@ -45,7 +45,7 @@ This demo turns every device's color into a single rainbow shifting effect. The 
 This demo turns every device's color into a single static color. The default value is set to `(255, 0,0` which is RED in RGB. If you would like to modify the colors, please modify `StaticColor.py` and set it as you would like. Dependencies are following libraries.
 - PyPeripheral : `pip install PyPeripheral`
 
-## Nope... I do not know Python...
+## Non-Programmers
 No worries! For Non-programmer and those who have no knowledge regarding Python, this is the right instruction for you. As this project PyPeripheral reads, this project is written in a programming language named Python. In order for you to run all those fancy stuff, you should install Python itself, and some other programs in order for this script to run. **Please  note that this program is not perfect. This might have a lot of bugs, and even can be unable to run on your PC.** 
 
 ### Step 1. Installing Python.
@@ -72,28 +72,33 @@ Path of Python is not successfully set. Please refer to
 If those do not work, please let me know. 
 This step is the most significant step for this script to work.
 
-### Step 3. Installing dependencies
-This program needs a bit more programs in order to work. This is called `dependeny`. This might seem a bit tricky but you have to download those `dependencies` in order for this program to work. Press `windows + r` and type in `cmd`,  just like you have done before, type those following commands **one by one** and install dependencies. **Please note that this needs internet connection and would take some time depending on your PC's spec and network  status.**
+### Step 3. Download this Program
+Please download the **latest** version of release from [here](https://github.com/gooday2die/PyPeripheral/releases/). Then unzip the file in a place that you would like to place at.
 
-```
-python -m pip install numpy
-python -m pip install scipy
-python -m pip install MSS
-python -m pip install pillow
-python -m pip install PyPeripheral
-```
+### Step 3. Installing dependencies
+This program needs a bit more programs in order to work. This is called `dependeny`. This might seem a bit tricky but you have to download those `dependencies` in order for this program to work. **Please note that this needs internet connection and would take some time depending on your PC's spec and network  status.**
+
+- From the folder that you have unzipped from **Step 3**, please double click a file named `installer.bat`. Your computer might or might not warn you from executing this file, but this is nothing suspicious. 
+- If you cannot trust me or think the file is suspicious, you can install all the dependencies yourself. by following steps.
+- - Open up `cmd` by pressing `window + r` at the same time. Enter `cmd` and open up the black screen with white letters. 
+- - Execute following commands on by one:
+- 1. `pip install numpy`
+- 2. `pip install scipy`
+- 3. `pip install mss`
+- 4. `pip install pillow`
+- 5. `pip install PyPeripheral`
 
 If you have successfully installed all the dependencies, you are almost ready to use this program.
 
 ### Step 4. Launching Program**
 1. Please download the latest release from [release](https://github.com/gooday2die/PyPeripheral/releases) section up above. Download the `.zip` file and unzip it with any tool that you would like to use. 
 2. After you have unzipped the `.zip` file, you can see several files in the folder. **Please note that the files that you are seeing might change from time to time**. 
-3. If you have installed all those `dependencies` by **Step 3**, please `double click` a file named `GUI.py`. (I have made a GUI interface so that you can use the program easily)
+3. If you have installed all those `dependencies` by **Step 3**, please `double click` a file named `runner.bat`. Your PC might or might not warn you from executing `runner.bat`. The file is not suspicious file. However, if you cannot trust me or think the file is malicious, you can open up the program by `double clicking` the file named `GUI.py`
 4. When you see the screen below, it means that you have set everything up correctly.
 ![enter image description here](https://raw.githubusercontent.com/gooday2die/PyPeripheral/OOP_Version/Demos/ui_pics/ui_1.png)
 
 - On the left side of the program, you are able to see 3 buttons: (Screen Reactive, Rainbow All, Static Color). Those buttons will let you choose which feature to use. 
-- - Screen Reactive : Reacts to the screen like [this](###%20Screen%20Reactive)
+- - Screen Reactive : Reacts to the screen like [this](### Screen Reactive)
 - - Rainbow All : Makes all your devices do a Rainbow Shift effect. Type in `Speed` for the speed of the rainbow shift effect.
 - - Static Color: Set all your devices in a color that you would like. Type in `R` , `G`, `B` valuse for your RGB value that you would like to set your devices. 
 - On the right side of the program, you are able to see your connected devices. Currently my program only supports **Corsair, Razer** at the moment. If you cannot see your connected devices in right side, please restart your PC or restart your Corsair ICUE or Razer Synapse. 

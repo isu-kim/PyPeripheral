@@ -146,14 +146,11 @@ class ui:
         del sdk_object
 
         connected_device_string = ""
-        try:
-            for sdk in dev_list:
-                connected_device_string = connected_device_string + "- " + str(sdk) + "\n"
-                for devices in dev_list[sdk]:
-                    connected_device_string = connected_device_string + str(devices) + " : " + \
-                                              str(dev_list[sdk][devices][0]) + "\n"
-        except TypeError:
-            connected_device_string = "No Connected Devices"
+        for sdk in dev_list:
+            connected_device_string = connected_device_string + "- " + str(sdk) + "\n"
+            for devices in dev_list[sdk]:
+                connected_device_string = connected_device_string + str(devices) + " : " + \
+                                          str(dev_list[sdk][devices][0]) + "\n"
 
         self.connected_devices.insert(tkinter.INSERT, connected_device_string)
         self.connected_devices.config(state=DISABLED)

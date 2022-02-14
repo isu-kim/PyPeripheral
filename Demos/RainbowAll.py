@@ -6,15 +6,13 @@
 """
 
 from PyPeripheral import All
+import asyncio
 
-
-def rainbow_all(step):
+async def rainbow_all(step, sdk_object):
     """
     Function for Setting all the keys rainbow shift.
     step is the parameter for how fast the rainbow should shift.
     """
-    sdk_object = All.SDK()
-    sdk_object.connect()
     while True:
         for g in range(0, 255, step):
             sdk_object.set_rgb({"ALL": (255, g, 0)})
@@ -36,4 +34,6 @@ def rainbow_all(step):
 
 
 if __name__ == '__main__':
-    rainbow_all(10)
+    sdk_object = All.SDK()
+    sdk_object.connect()
+    asyncio.run(rainbow_all(10, sdk_object))

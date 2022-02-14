@@ -9,12 +9,14 @@ from PyPeripheral import All
 
 
 def rainbow_all(step):
+    """
+    A function that does rainbow shifting
+    :param step: the steps for rainbow shifting
+    :return: returns None
+    """
     sdk_object = All.SDK()
     sdk_object.connect()
-    """
-    Function for Setting all the keys rainbow shift.
-    step is the parameter for how fast the rainbow should shift.
-    """
+
     while True:
         for g in range(0, 255, step):
             sdk_object.set_rgb({"ALL": (255, g, 0)})

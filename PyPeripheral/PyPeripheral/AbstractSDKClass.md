@@ -131,7 +131,12 @@ If requested as up above, this method should be able to set the whole device col
  - **Returns**: None
  - **Params**: `tuple` object that contains `dict` that represents `type` and `tuple` object that contains RGB values.
 
-### Hey, I made a new Wrapper SDK Class! What shall I do?
+### 7. Representing the Class
+`def __repr__(self)` : This method is to return current object as `object`. It is highly recommended to return in following format. This method will be represented in `All` Class as the SDK's name.
+- `SDKNAME SDK`
+- Example : `Corsair SDK`, `Razer SDK`
+
+## Hey, I made a new Wrapper SDK Class! What shall I do?
 If you are willing to contribute to our project, and would like your Python Wrapper SDK Class as our library's official Wrapper Class, please Pull Request. However, please verify that the submitted Wrapper SDK Class is working on your devices also, please send me a proof that the code works. Unfortunately, I do not have that many devices to test with, so I am not able to check your code is working or not. My apologies for your inconvenience. Please PR in following format.
 
 1. SDK's Name :

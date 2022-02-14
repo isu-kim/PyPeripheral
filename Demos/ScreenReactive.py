@@ -15,6 +15,12 @@ from PyPeripheral import All
 
 
 def return_rgb():
+    """
+    A method that returns the most dominant color of current screen
+    This code is from https://stackoverflow.com/questions/3241929/python-find-dominant-most-common-color-in-an-image
+    Edited a bit of code in order to work in our demo script
+    :return: returns tuple type of rgb values of most dominant color.
+    """
     with mss.mss() as sct:
         # Get rid of the first, as it represents the "All in One" monitor:
         for num, monitor in enumerate(sct.monitors[1:], 1):
@@ -45,6 +51,10 @@ def return_rgb():
 
 
 def screen_reactive():
+    """
+    A method that does screen reactive lightning
+    :return: returns None
+    """
     sdk_object = All.SDK()
     sdk_object.connect()
     while True:

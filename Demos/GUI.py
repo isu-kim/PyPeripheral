@@ -27,27 +27,28 @@ class ui:
         """
         self.master = tkinter.Tk()
         self.master.title("PyPeripheral Demo GUI")
-        self.master.geometry("450x250")
+        self.master.geometry("450x300")
         self.master.resizable(width=False, height=False)
 
-        self.cur_mode_text = tkinter.StringVar()
+        self.cur_mode_text = tkinter.StringVar()  # For current mode that is located in mid up screen
         self.cur_mode = None
 
-        self.button1 = None
-        self.button2 = None
-        self.button3 = None
-        self.button4 = None
+        self.error_text = tkinter.StringVar()
+        self.error = ""
 
-        self.r_val = None
-        self.g_val = None
-        self.b_val = None
+        self.button1 = None  # For Screen Reactive
+        self.button2 = None  # For Rainbow All
+        self.button3 = None  # For Static Colors
+        self.button4 = None  # For Exit
 
-        self.connected_devices = None
+        self.r_val = None  # For Red value of Static Colors
+        self.g_val = None  # For Green value of Static Colors
+        self.b_val = None  # For Blue value of Static Colors
+        self.speed_val = None  # For Speed value of rainbow all
+
+        self.connected_devices = None  # For all connected devices
 
         self.demo_process = None
-
-        self.sdk_object = All.SDK()
-        self.sdk_object.connect()
 
     def start(self):
         """
@@ -56,7 +57,7 @@ class ui:
         """
         self.set_buttons()
         self.set_labels()
-        self.set_rgb_inputs()
+        self.set_inputs()
         self.show_connected_devices()
         self.master.mainloop()
 
@@ -72,10 +73,10 @@ class ui:
         self.button2.place(x=10, y=90, width=200, height=50)
 
         self.button3 = tkinter.Button(self.master, text="Static Color", command=self.static)
-        self.button3.place(x=10, y=150, width=200, height=50)
+        self.button3.place(x=10, y=175, width=200, height=50)
 
         self.button4 = tkinter.Button(self.master, text="EXIT", command=self.exit_program)
-        self.button4.place(x=240, y=200, width=200, height=30)
+        self.button4.place(x=240, y=225, width=200, height=30)
 
     def exit_program(self):
         """
@@ -94,9 +95,11 @@ class ui:
         A method that sets labels in the ui section
         :return: returns None
         """
-        tkinter.Label(self.master, text="R").place(x=10, y=210)
-        tkinter.Label(self.master, text="G").place(x=65, y=210)
-        tkinter.Label(self.master, text="B").place(x=120, y=210)
+        tkinter.Label(self.master, text="R").place(x=10, y=235)
+        tkinter.Label(self.master, text="G").place(x=65, y=235)
+        tkinter.Label(self.master, text="B").place(x=120, y=235)
+
+        tkinter.Label(self.master, text="Speed : ").place(x=10, y=150)
 
         tkinter.Label(self.master, text="Current Mode : ", font=('arial', 9, BOLD)).place(x=10, y=5)
         tkinter.Label(self.master, text="Connected Devices", font=('arial', 9, BOLD)).place(x=275, y=5)
@@ -104,18 +107,29 @@ class ui:
         self.cur_mode = tkinter.Label(self.master, textvariable=self.cur_mode_text)
         self.cur_mode.place(x=100, y=5)
 
-    def set_rgb_inputs(self):
+        self.error = tkinter.Label(self.master, textvariable=self.error_text)
+        self.error.place(x=10, y=265)
+
+    def set_inputs(self):
         """
-        A method that sets input fields for rgb values in the ui field
+        A method that sets input fields for values in the ui field
         :return: returns None
         """
         self.r_val = tkinter.Entry(self.master)
         self.g_val = tkinter.Entry(self.master)
         self.b_val = tkinter.Entry(self.master)
+        self.speed_val = tkinter.Entry(self.master)
 
-        self.r_val.place(x=30, y=210, width=30)
-        self.g_val.place(x=85, y=210, width=30)
-        self.b_val.place(x=140, y=210, width=30)
+        self.r_val.insert(tkinter.INSERT, "255")  # set example values for inputs
+        self.g_val.insert(tkinter.INSERT, "255")
+        self.b_val.insert(tkinter.INSERT, "255")
+        self.speed_val.insert(tkinter.INSERT, "10")
+
+        self.r_val.place(x=30, y=235, width=30)
+        self.g_val.place(x=85, y=235, width=30)
+        self.b_val.place(x=140, y=235, width=30)
+
+        self.speed_val.place(x=60, y=150, width=30)
 
     def show_connected_devices(self):
         """
@@ -123,12 +137,11 @@ class ui:
         :return: returns None
         """
         self.connected_devices = tkinter.Text(self.master)
-        self.connected_devices.place(x=240, y=30, width=200, height=150)
+        self.connected_devices.place(x=240, y=30, width=200, height=175)
 
         sdk_object = All.SDK()
         sdk_object.connect()
         dev_list = sdk_object.get_all_device_information()
-        print(dev_list)
         sdk_object.disable()
         del sdk_object
 
@@ -139,7 +152,7 @@ class ui:
                 connected_device_string = connected_device_string + str(devices) + " : " + \
                                           str(dev_list[sdk][devices][0]) + "\n"
 
-        self.connected_devices.insert(tkinter.INSERT,connected_device_string)
+        self.connected_devices.insert(tkinter.INSERT, connected_device_string)
         self.connected_devices.config(state=DISABLED)
 
     def screen_reactive(self):
@@ -160,28 +173,51 @@ class ui:
         A method that runs Rainbow all using multi thread
         :return: returns None
         """
-        self.cur_mode_text.set("Rainbow All")
         try:
-            self.demo_process.terminate()
-        except AttributeError:
-            pass
-        self.demo_process = multiprocessing.Process(target=RainbowAll.rainbow_all, kwargs={"step": 10})
-        self.demo_process.start()
+            speed = int(self.speed_val.get())
+            if not 0 <= speed <= 255:
+                raise ValueError
+
+            self.cur_mode_text.set("Rainbow All - Speed : " + self.speed_val.get())
+
+            try:
+                self.demo_process.terminate()
+            except AttributeError:
+                pass
+            self.demo_process = multiprocessing.Process(target=RainbowAll.rainbow_all, kwargs={"step": speed})
+            self.demo_process.start()
+
+        except ValueError:
+            self.error_text.set("Error : Shifting Values must be Integers (0 ~ 255)")
 
     def static(self):
         """
         A method that runs static rainbow effect with multi thread
         :return: returns None
         """
-        self.cur_mode_text.set("Static Color")
-        try:
-            self.demo_process.terminate()
-        except AttributeError:
-            pass
-        self.demo_process = multiprocessing.Process(target=StaticColor.static_color, kwargs={"r": 0, "g": 255, "b": 0})
-        self.demo_process.start()
+
+        try:  # check if the rgb value is valid
+            rgb_val = (int(self.r_val.get()), int(self.g_val.get()), int(self.b_val.get()))
+            for color_val in rgb_val:  # check value range
+                if not 0 <= color_val <= 255:
+                    raise ValueError
+            self.cur_mode_text.set("Static Color - " + str(rgb_val))
+
+            try:  # terminate process before
+                self.demo_process.terminate()
+            except AttributeError:  # if this was the first process, pass
+                pass
+
+            self.demo_process = multiprocessing.Process(target=StaticColor.static_color,
+                                                        kwargs={"r": rgb_val[0], "g": rgb_val[1], "b": rgb_val[2]})
+            self.demo_process.start()  # set value
+
+        except ValueError:
+            self.error_text.set("Error : RGB Values must be Integers (0 ~ 255)")
 
 
 if __name__ == "__main__":
     u = ui()
+    print("Starting UI")
     u.start()
+    print("Stopped UI")

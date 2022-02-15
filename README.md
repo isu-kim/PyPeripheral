@@ -5,7 +5,7 @@
 ### Motivation & Goal  
 I got multiple RGB peripheral devices from multiple brands: Razer, Corsair, MSI. So, whenever I try to use a simple `rainbow` effect for each devices, they do not sync. So the main motivation and goal of this project is to **"Provide a Python library for controlling every RGB devices all together"**   
 ## Installing this Project  
-Installing this library for your personal project would be a piece of cake. There will be multiple ways of installing this project, however the easiest way would be using `pip`.  However, in near future, I will be providing that support as  soon as possible.  
+Installing this library for your personal project would be a piece of cake. There will be multiple ways of installing this project, however the easiest way would be using `pip`. 
   
   ### Manual Installation
  1. `clone` this repository to your system  
@@ -45,6 +45,13 @@ a = All.SDK()
 a.connect()
 a.set_rgb({"All": (0, 255, 0)})
 ```
+### Getting All Razer Devices
+```
+>>> r.get_all_device_information()
+{'Mouse': [('DeathAdderElite', 0), ('DeathAdderEssential', 1)]}
+>>> r.get_device_information(1)
+('Mouse', 'DeathAdderEssential')
+```
 ## Demos
 For demonstration videos and gifs, please check [here](https://github.com/gooday2die/PyPeripheral/tree/OOP_Version/Demos) for more information! The demo contains most loved **Screen Reactive Lightning** feature as well!
 ## Contributions  
@@ -57,3 +64,17 @@ I do not have every RGB devices on planet Earth. If you have any devices and bra
 Download this project and run simple demos. demos will be provided in the script soon. If you have checked any issues, or confirmed that the program is working for your devices and your environment, let me know by sending a simple email to edina00@naver.com. I will very much appreciate your help and will upload your demo videos or images if provided.  
 ### I have found a bug  
 Please report it through issue sections. Or, if you can manage to fix that bug yourself, please do a PR. Any Issues or PR are always welcomed!
+
+## Supported SDKs
+
+- Corsair ICUE SDK (thanks to [cue-sdk](https://github.com/CorsairOfficial/cue-sdk))
+- Razer Chroma SDK (thanks to [requests](https://github.com/psf/requests))
+
+## Confirmed Checking Devices
+### Corsair
+- MM800RGB
+- GLAIVE PRO RGB
+
+### Razer
+- Deathadder Elite Chroma
+

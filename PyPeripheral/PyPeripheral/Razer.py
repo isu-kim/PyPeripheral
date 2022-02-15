@@ -8,6 +8,7 @@
 
 import json
 import multiprocessing
+import re
 import time
 
 import requests
@@ -87,23 +88,53 @@ class SDK(abstractSDK.SDK):
         """
         self.heart_beat_thread.terminate()  # stop heart beating immediately
         result = requests.delete(self.uri)
-        print(result.text)
         del self.heart_beat_thread
 
     def get_all_device_information(self):
         """
         A get_all_device_information method for Razer SDK.
-        Razer SDK does not provide any way of getting connected devices.
-        Thus this method is invalid in this SDK.
+        Razer REST API SDK does NOT provide us the connected device information.
+        So we are using subprocess and powershell to find out connected devices.
+
+        Since this will be not official way to find out devices that contains name Razer, so there might be
+        some devices that is recognized however is not available with Razer Chroma SDK.
+
+        Again, this method finds out devices with having Razer in its friendly name.
+        Thus, this might not be correct and can have missing devices or have devices that does not support chroma SDK.
+
         :return: returns dictionary object of all device information
         """
 
+        # Find out the connected device's Friendly name using powershell
         p = subprocess.Popen(["powershell.exe", "-Command",
-                              "Get-PnpDevice -PresentOnly | Where-Object {$_.FriendlyName -match '^Razer'} | Select-Object -Property InstanceId, FriendlyName"],
+                              "Get-PnpDevice -PresentOnly | Where-Object {$_.FriendlyName -match '^Razer'} | "
+                              "Select-Object -Property FriendlyName"],
                              stdout=subprocess.PIPE)
-        result = p.stdout.read().decode('utf-8')
 
-        self.all_devices = dict()
+        device_names = p.stdout.read().decode('utf-8').split("\n")[3:]  # Find out device's names
+
+        for i in range(len(device_names)):  # Perform preprocessing
+            device_names[i] = device_names[i].replace("\r", "")
+            device_names[i] = device_names[i].replace(" ", "")
+            device_names[i] = device_names[i].replace("Razer", "")
+
+        device_names = list(set(device_names))  # Remove duplicates
+        device_names.remove("ControlDevice")  # Remove RazerControlDevice which is kind of virtual device for Razer
+        device_names.remove("")  # Remove ones with no names
+
+        total_device_count = 0  # count devices starting from 0 for device indexing
+
+        self.all_devices = dict()  # the result devices
+        for i in device_names:
+            if self.__get_device_type(i) in self.all_devices.keys():  # If there are duplicate devices
+                cur_list = (i, total_device_count)
+                total_device_count += 1
+                self.all_devices[self.__get_device_type(i)].append(cur_list)
+            else:  # If this device was the first with that type
+                cur_list = (i, total_device_count)
+                total_device_count += 1
+                self.all_devices[self.__get_device_type(i)] = [cur_list]
+
         return self.all_devices
 
     def get_device_information(self, index):
@@ -114,10 +145,11 @@ class SDK(abstractSDK.SDK):
         :param index: the index of device to get information
         :return: returns Device Information object.
         """
-        try:
-            pass
-        except ValueError:
-            raise Errors.InvalidDeviceIndexError("Invalid device index : " + str(index))
+        for device_types in self.all_devices:
+            for device in self.all_devices[device_types]:
+                if device[1] == index:
+                    return device_types, device[0]
+        raise Errors.InvalidDeviceIndexError("Invalid device index : " + str(index))
 
     def set_rgb(self, rgb_info):
         """
@@ -209,6 +241,36 @@ class SDK(abstractSDK.SDK):
         # if you would like to check why if effect was not working, please print out the request up above.
         # With https://assets.razerzone.com/dev_portal/REST/html/_rz_errors_8h.html, you can find out which error
         # occurred by looking at results.
+
+    @staticmethod
+    def __get_device_type(device_name):
+        """
+        A method that gets device types by name.
+        This method checks if the device name contains specific keywords which includes device types.
+        For example, if a device_name contains deathadder, this method will return "Mouse" as its return value.
+
+        The device list is from https://assets.razerzone.com/dev_portal/REST/html/_rz_chroma_s_d_k_defines_8h_source.html
+        However, there might be some devices missing in the SDK, so this is not 100% correct.
+
+        :param device_name: the string object of device name
+        :return: returns string object of device type
+        """
+        mouse_name_list = ["deathadder", "mamba", "diamondback", "naga", "orochi"]
+        keyboard_name_list = ["blackwidow", "deathstalker", "overwatch", "ornata", "blade", "huntsman"]
+        headset_name_list = ["kraken", "manowar"]
+        mouse_mat_name_list = ["firefly"]
+        etc_name_list = ["tartarus", "orbweaver", "nommo", "lenovo", "chromabox", "core"]
+
+        if any (name in device_name.lower() for name in mouse_name_list):
+            return "Mouse"
+        elif any (name in device_name.lower() for name in keyboard_name_list):
+            return "Keyboard"
+        elif any (name in device_name.lower() for name in headset_name_list):
+            return "Headset"
+        elif any (name in device_name.lower() for name in mouse_mat_name_list):
+            return "MouseMat"
+        elif any (name in device_name.lower() for name in etc_name_list):
+            return "ETC"
 
     @staticmethod
     def __convert_hex(r, g, b):

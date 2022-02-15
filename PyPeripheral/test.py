@@ -2,14 +2,21 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-import random
+import re
+import subprocess
 
-from PyPeripheral import Razer
-
+from PyPeripheral import All
 
 
 if __name__ == "__main__":
-    r = Razer.SDK()
+    a = All.SDK()
+    a.connect()
+    print(a.get_all_device_information())
+    a.disable()
+"""    r = Razer.SDK()
     r.connect()
-    r.get_all_device_information()
-    r.disable()
+    a = r.get_all_device_information()
+    print(a)
+    print(r.get_device_information(0))
+    print(r.get_device_information(1))
+    r.disable()"""

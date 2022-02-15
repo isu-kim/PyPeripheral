@@ -56,7 +56,10 @@ class SDK(abstractSDK.SDK):
             cur_device_info = self.corsair_object.get_device_info(i)
             device_type = self.__get_enum_values(cur_device_info.type.value)
             device_name = cur_device_info.model
-            self.all_devices[device_type] = (device_name, i)
+            if device_type in self.all_devices.keys():
+                self.all_devices[device_type].append((device_name, i))
+            else:
+                self.all_devices[device_type] = [(device_name, i)]
 
         return self.all_devices
 

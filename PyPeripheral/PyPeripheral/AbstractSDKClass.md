@@ -88,13 +88,22 @@ Wrapper Abstraction Class is located as `Wrappers.abstractSDK.py` . This is an a
  - **Returns**: None
  - **Params**: None
 ### 4. Getting All Device Information
-`def get_all_device_information(self)` : This method is for getting all connected device information from SDK. This method is expected to return a `dict` type object as its result in a format. A example is shown below.
+`def get_all_device_information(self)` : This method is for getting all connected device information from SDK. This method is expected to return a `dict` type object as its result in a format.  Examples are shown below.
 
+- **Just with one connected device types **
 ```
-{'MouseMat': ('MM800RGB', 0), 'Keyboard': ('K95 RGB PLATINUM', 1), 'Headset': ('VOID PRO USB', 2),  
-'Motherboard': ('ASUS Motherboard', 3), ...}
+{'MouseMat': [('MM800RGB', 0)], 'Keyboard': [('K95 RGB PLATINUM', 1)], 'Headset': [('VOID PRO USB', 2)],  
+'Motherboard': [('ASUS Motherboard', 3)], ...}
 ```
-Each `dict` object should contain `type` as its `key` and `tuple` type object containing the connected devices name, and index number as its value. If there is no index assigned by original SDKs, it is suggested to assign one by yourself. **There is no assigning rule, however there should be no multiple index numbers assigned to different devices.** The `type` of devices are listed below. **Please be aware that the list types can be updated later**
+- **Multiple connected device types**
+```
+{'Mouse': [('DeathAdderEssential', 0), ('DeathAdderElite', 1)]}
+```
+- **Multiple devices with same types**
+```
+{'Corsair SDK': {'Mouse': [('GLAIVE RGB', 0)]}, 'Razer SDK': {'Mouse': [('DeathAdderEssential', 0)]}}
+```
+Each `dict` object should contain `type` as its `key` and `list` type object containing the connected devices name, and index number as its value. If there is no index assigned by original SDKs, it is suggested to assign one by yourself. **There is no assigning rule, however there should be no multiple index numbers assigned to different devices.** The `type` of devices are listed below. **Please be aware that the list types can be updated later**
 1. Mouse
 2. Keyboard
 3. Headset

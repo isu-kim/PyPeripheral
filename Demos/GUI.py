@@ -16,6 +16,23 @@ import StaticColor
 
 import multiprocessing
 
+"""
+TODO:
+change multiprocessing to threading.
+loop till events.
+
+multiprocessing now is kind of a temp soloution.
+This kind of spamms razer sdk to an extent that razer cannot handle.
+Thus razer kills itself and does not work.
+
+solution
+1. make all object
+2. use it till the end of the program
+3. for each threads, pass object as arguments
+4. each threads will run till events occur
+5. raise event when another button was pressed.
+
+"""
 
 class ui:
     """
@@ -88,7 +105,6 @@ class ui:
         sdk_object = All.SDK()
         sdk_object.connect()
         sdk_object.disable()
-        exit(0)
 
     def set_labels(self):
         """
@@ -149,9 +165,10 @@ class ui:
         try:
             for sdk in dev_list:
                 connected_device_string = connected_device_string + "- " + str(sdk) + "\n"
-                for devices in dev_list[sdk]:
-                    connected_device_string = connected_device_string + str(devices) + " : " + \
-                                              str(dev_list[sdk][devices][0]) + "\n"
+                for device_type in dev_list[sdk]:
+                    for device in dev_list[sdk][device_type]:
+                        connected_device_string = connected_device_string + str(device_type) + " : " + \
+                                          str(device[0]) + "\n"
         except TypeError:
             connected_device_string = "No Connected Devices"
 
@@ -224,3 +241,5 @@ if __name__ == "__main__":
     print("Starting UI")
     u.start()
     print("Stopped UI")
+    exit(0)
+

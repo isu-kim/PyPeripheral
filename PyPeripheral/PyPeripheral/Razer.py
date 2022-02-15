@@ -15,6 +15,8 @@ import requests
 from PyPeripheral import abstractSDK
 from PyPeripheral import Errors
 
+import subprocess
+
 
 def put_heart_beat(uri):
     """
@@ -66,7 +68,6 @@ class SDK(abstractSDK.SDK):
             response = requests.post(url=url, json=jsondata)
             try:
                 self.uri = json.loads(response.text)['uri']
-
                 self.heart_beat_thread = multiprocessing.Process(target=put_heart_beat, kwargs={"uri": self.uri})
                 self.heart_beat_thread.start()  # start heartbeat thread
             except KeyError:
@@ -85,6 +86,8 @@ class SDK(abstractSDK.SDK):
         :return: returns None
         """
         self.heart_beat_thread.terminate()  # stop heart beating immediately
+        result = requests.delete(self.uri)
+        print(result.text)
         del self.heart_beat_thread
 
     def get_all_device_information(self):
@@ -94,6 +97,12 @@ class SDK(abstractSDK.SDK):
         Thus this method is invalid in this SDK.
         :return: returns dictionary object of all device information
         """
+
+        p = subprocess.Popen(["powershell.exe", "-Command",
+                              "Get-PnpDevice -PresentOnly | Where-Object {$_.FriendlyName -match '^Razer'} | Select-Object -Property InstanceId, FriendlyName"],
+                             stdout=subprocess.PIPE)
+        result = p.stdout.read().decode('utf-8')
+
         self.all_devices = dict()
         return self.all_devices
 
@@ -189,7 +198,6 @@ class SDK(abstractSDK.SDK):
                     raise Errors.InvalidRgbValueError("RGB Value : " + str(values) + " is invalid RGB Value")
                 except KeyError:  # when the effect id was not generated
                     raise Errors.RazerRGBSetError("Cannot generate effect")
-
 
         url = self.uri + "/effect"
         data = {

@@ -205,7 +205,6 @@ class ui:
                 del self.demo_object
             except AttributeError:  # If this was the first control, pass
                 pass
-            self.cur_mode_text.set("Screen Reactive")
             self.demo_object = RainbowAll.Demo()
             self.demo_object.run(sdk_object=self.sdk_object, step=speed)
 
@@ -230,7 +229,6 @@ class ui:
                 del self.demo_object
             except AttributeError:  # If this was the first control, pass
                 pass
-            self.cur_mode_text.set("Screen Reactive")
             self.demo_object = StaticColor.Demo()
             self.demo_object.run(sdk_object=self.sdk_object, r=rgb_val[0], g=rgb_val[1], b=rgb_val[2])
 

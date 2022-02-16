@@ -6,6 +6,7 @@
 """
 
 import threading
+import time
 
 from PyPeripheral import All
 from abstractDemo import AbstractDemo
@@ -51,8 +52,9 @@ class Demo(AbstractDemo):
         A function that sets a single color over all devices
         :return: returns None
         """
-        while True:
+        while self.is_running:
             self.sdk_object.set_rgb({"ALL": (self.r, self.g, self.b)})
+        return
 
 
 if __name__ == '__main__':

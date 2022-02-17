@@ -14,7 +14,6 @@ import RainbowAll
 import ScreenReactive
 import StaticColor
 
-import multiprocessing
 
 """
 TODO:
@@ -33,6 +32,7 @@ solution
 5. raise event when another button was pressed.
 
 """
+
 
 class ui:
     """
@@ -65,7 +65,8 @@ class ui:
 
         self.connected_devices = None  # For all connected devices
 
-        self.demo_process = None
+        self.demo_object = None
+        self.sdk_object = None
 
     def start(self):
         """
@@ -101,7 +102,9 @@ class ui:
         :return: returns None, Exits with 0
         """
         self.master.destroy()
-        self.demo_process.terminate()
+        self.demo_object.stop()
+        del self.demo_object
+
         sdk_object = All.SDK()
         sdk_object.connect()
         sdk_object.disable()
@@ -155,11 +158,9 @@ class ui:
         self.connected_devices = tkinter.Text(self.master)
         self.connected_devices.place(x=240, y=30, width=200, height=175)
 
-        sdk_object = All.SDK()
-        sdk_object.connect()
-        dev_list = sdk_object.get_all_device_information()
-        sdk_object.disable()
-        del sdk_object
+        self.sdk_object = All.SDK()
+        self.sdk_object.connect()
+        dev_list = self.sdk_object.get_all_device_information()
 
         connected_device_string = ""
         try:
@@ -181,12 +182,13 @@ class ui:
         :return: returns None
         """
         try:  # If there were any process that was running RGB control, terminate it
-            self.demo_process.terminate()
+            self.demo_object.stop()
+            del self.demo_object
         except AttributeError:  # If this was the first control, pass
             pass
         self.cur_mode_text.set("Screen Reactive")
-        self.demo_process = multiprocessing.Process(target=ScreenReactive.screen_reactive)
-        self.demo_process.start()
+        self.demo_object = ScreenReactive.Demo()
+        self.demo_object.run(sdk_object=self.sdk_object)
 
     def rainbow_all(self):
         """
@@ -200,12 +202,13 @@ class ui:
 
             self.cur_mode_text.set("Rainbow All - Speed : " + self.speed_val.get())
 
-            try:
-                self.demo_process.terminate()
-            except AttributeError:
+            try:  # If there were any process that was running RGB control, terminate it
+                self.demo_object.stop()
+                del self.demo_object
+            except AttributeError:  # If this was the first control, pass
                 pass
-            self.demo_process = multiprocessing.Process(target=RainbowAll.rainbow_all, kwargs={"step": speed})
-            self.demo_process.start()
+            self.demo_object = RainbowAll.Demo()
+            self.demo_object.run(sdk_object=self.sdk_object, step=speed)
 
         except ValueError:
             self.error_text.set("Error : Shifting Values must be Integers (0 ~ 255)")
@@ -223,14 +226,13 @@ class ui:
                     raise ValueError
             self.cur_mode_text.set("Static Color - " + str(rgb_val))
 
-            try:  # terminate process before
-                self.demo_process.terminate()
-            except AttributeError:  # if this was the first process, pass
+            try:  # If there were any process that was running RGB control, terminate it
+                self.demo_object.stop()
+                del self.demo_object
+            except AttributeError:  # If this was the first control, pass
                 pass
-
-            self.demo_process = multiprocessing.Process(target=StaticColor.static_color,
-                                                        kwargs={"r": rgb_val[0], "g": rgb_val[1], "b": rgb_val[2]})
-            self.demo_process.start()  # set value
+            self.demo_object = StaticColor.Demo()
+            self.demo_object.run(sdk_object=self.sdk_object, r=rgb_val[0], g=rgb_val[1], b=rgb_val[2])
 
         except ValueError:
             self.error_text.set("Error : RGB Values must be Integers (0 ~ 255)")
@@ -242,4 +244,3 @@ if __name__ == "__main__":
     u.start()
     print("Stopped UI")
     exit(0)
-

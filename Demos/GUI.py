@@ -14,7 +14,6 @@ import RainbowAll
 import ScreenReactive
 import StaticColor
 
-import multiprocessing
 
 """
 TODO:
@@ -33,6 +32,7 @@ solution
 5. raise event when another button was pressed.
 
 """
+
 
 class ui:
     """
@@ -102,7 +102,9 @@ class ui:
         :return: returns None, Exits with 0
         """
         self.master.destroy()
-        self.demo_process.terminate()
+        self.demo_object.stop()
+        del self.demo_object
+
         sdk_object = All.SDK()
         sdk_object.connect()
         sdk_object.disable()
@@ -242,4 +244,3 @@ if __name__ == "__main__":
     u.start()
     print("Stopped UI")
     exit(0)
-

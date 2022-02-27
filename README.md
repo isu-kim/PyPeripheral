@@ -56,7 +56,7 @@ True
 ```
 
 ## Using PyPeripheral
-
+Will be updated soon
 
 
 ## Demos
@@ -78,5 +78,5 @@ Please report it through issue sections. Or, if you can manage to fix that bug y
 - Razer Chroma SDK (By @Gooday2die)
 
 ## Confirmed Checking Devices
-Check [here](https://github.com/gooday2die/PyPeripheral/blob/cython/github/WorkingDevices.md) for more information
+Check [here](https://github.com/gooday2die/PyPeripheral/blob/Cython/github/WorkingDevices.md) for more information
 

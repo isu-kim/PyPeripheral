@@ -1,0 +1,5 @@
+[build-system]
+# This requires Cython in order for Cythonizing.
+# https://stackoverflow.com/questions/44554882/in-a-setup-py-involving-cython-if-install-requires-then-how-can-from-library-i
+# Check the Stackoverflow link for more information about installing Cython before pip installing setup.py
+requires = ["setuptools", "wheel", "Cython"]

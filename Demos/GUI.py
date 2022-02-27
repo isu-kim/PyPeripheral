@@ -15,25 +15,6 @@ import ScreenReactive
 import StaticColor
 
 
-"""
-TODO:
-change multiprocessing to threading.
-loop till events.
-
-multiprocessing now is kind of a temp soloution.
-This kind of spamms razer sdk to an extent that razer cannot handle.
-Thus razer kills itself and does not work.
-
-solution
-1. make all object
-2. use it till the end of the program
-3. for each threads, pass object as arguments
-4. each threads will run till events occur
-5. raise event when another button was pressed.
-
-"""
-
-
 class ui:
     """
     A class for main ui of this program
@@ -61,7 +42,7 @@ class ui:
         self.r_val = None  # For Red value of Static Colors
         self.g_val = None  # For Green value of Static Colors
         self.b_val = None  # For Blue value of Static Colors
-        self.speed_val = None  # For Speed value of rainbow all
+        self.delay_val = None  # For delay value of rainbow all
 
         self.connected_devices = None  # For all connected devices
 
@@ -105,7 +86,7 @@ class ui:
         self.demo_object.stop()
         del self.demo_object
 
-        sdk_object = All.SDK()
+        sdk_object = All.sdk()
         sdk_object.connect()
         sdk_object.disable()
 
@@ -118,7 +99,7 @@ class ui:
         tkinter.Label(self.master, text="G").place(x=65, y=235)
         tkinter.Label(self.master, text="B").place(x=120, y=235)
 
-        tkinter.Label(self.master, text="Speed : ").place(x=10, y=150)
+        tkinter.Label(self.master, text="Delay : ").place(x=10, y=150)
 
         tkinter.Label(self.master, text="Current Mode : ", font=('arial', 9, BOLD)).place(x=10, y=5)
         tkinter.Label(self.master, text="Connected Devices", font=('arial', 9, BOLD)).place(x=275, y=5)
@@ -137,18 +118,18 @@ class ui:
         self.r_val = tkinter.Entry(self.master)
         self.g_val = tkinter.Entry(self.master)
         self.b_val = tkinter.Entry(self.master)
-        self.speed_val = tkinter.Entry(self.master)
+        self.delay_val = tkinter.Entry(self.master)
 
         self.r_val.insert(tkinter.INSERT, "255")  # set example values for inputs
         self.g_val.insert(tkinter.INSERT, "255")
         self.b_val.insert(tkinter.INSERT, "255")
-        self.speed_val.insert(tkinter.INSERT, "10")
+        self.delay_val.insert(tkinter.INSERT, "0.0001")
 
         self.r_val.place(x=30, y=235, width=30)
         self.g_val.place(x=85, y=235, width=30)
         self.b_val.place(x=140, y=235, width=30)
 
-        self.speed_val.place(x=60, y=150, width=30)
+        self.delay_val.place(x=60, y=150, width=75)
 
     def show_connected_devices(self):
         """
@@ -158,7 +139,7 @@ class ui:
         self.connected_devices = tkinter.Text(self.master)
         self.connected_devices.place(x=240, y=30, width=200, height=175)
 
-        self.sdk_object = All.SDK()
+        self.sdk_object = All.sdk()
         self.sdk_object.connect()
         dev_list = self.sdk_object.get_all_device_information()
 
@@ -196,11 +177,11 @@ class ui:
         :return: returns None
         """
         try:
-            speed = int(self.speed_val.get())
-            if not 0 <= speed <= 255:
+            delay = float(self.delay_val.get())
+            if not 0 <= delay <= 10:
                 raise ValueError
 
-            self.cur_mode_text.set("Rainbow All - Speed : " + self.speed_val.get())
+            self.cur_mode_text.set("Rainbow All - Delay : " + self.delay_val.get())
 
             try:  # If there were any process that was running RGB control, terminate it
                 self.demo_object.stop()
@@ -208,10 +189,10 @@ class ui:
             except AttributeError:  # If this was the first control, pass
                 pass
             self.demo_object = RainbowAll.Demo()
-            self.demo_object.run(sdk_object=self.sdk_object, step=speed)
+            self.demo_object.run(sdk_object=self.sdk_object, delay=delay)
 
         except ValueError:
-            self.error_text.set("Error : Shifting Values must be Integers (0 ~ 255)")
+            self.error_text.set("Error : Delay Value must be Float (0 ~ 10)")
 
     def static(self):
         """

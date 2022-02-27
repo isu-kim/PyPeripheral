@@ -1,6 +1,8 @@
-.idea/
-venv/
-__pycache__
-PyPeripheral/dist
-PyPeripheral/PyPeripheral.egg-info
-PyPeripheral/test.py
+.idea
+venv
+__pycache__/
+setuaap.py
+cythontest/
+build
+PyPeripheral.egg-info
+testdir

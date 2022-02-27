@@ -5,9 +5,11 @@
 @file : RainbowAll.py
 """
 import threading
+import time
 
 from PyPeripheral import All
 from abstractDemo import AbstractDemo
+
 
 
 class Demo(AbstractDemo):
@@ -18,7 +20,7 @@ class Demo(AbstractDemo):
         self.thread = None
         self.is_running = False
         self.sdk_object = None
-        self.step = 0
+        self.delay = 0
 
     def run(self, **kwargs):
         """
@@ -29,14 +31,14 @@ class Demo(AbstractDemo):
         self.thread = threading.Thread(target=self.__rainbow_all)
         self.is_running = True
         self.sdk_object = kwargs['sdk_object']
-        self.step = kwargs['step']
+        self.delay = kwargs['delay']
         self.thread.start()
 
     def stop(self):
         """
         An abstract method for stopping this demo.
         This method will terminate the demo script and this object.
-        :return:
+        :return: returns None
         """
         self.is_running = False
         self.thread.join()
@@ -47,35 +49,41 @@ class Demo(AbstractDemo):
         :return: returns None
         """
         while True:
-            for g in range(0, 255, self.step):
+            for g in range(0, 255, 1):
                 if not self.is_running:
                     return None
                 self.sdk_object.set_rgb({"ALL": (255, g, 0)})
+                time.sleep(self.delay)
 
-            for r in range(255, 0, -self.step):
+            for r in range(255, 0, -1):
                 if not self.is_running:
                     return None
                 self.sdk_object.set_rgb({"ALL": (r, 255, 0)})
+                time.sleep(self.delay)
 
-            for b in range(0, 255, self.step):
+            for b in range(0, 255, 1):
                 if not self.is_running:
                     return None
                 self.sdk_object.set_rgb({"ALL": (0, 255, b)})
+                time.sleep(self.delay)
 
-            for g in range(255, 0, -self.step):
+            for g in range(255, 0, -1):
                 if not self.is_running:
                     return None
                 self.sdk_object.set_rgb({"ALL": (0, g, 255)})
+                time.sleep(self.delay)
 
-            for r in range(0, 255, self.step):
+            for r in range(0, 255, 1):
                 if not self.is_running:
                     return None
-                self.sdk_object.set_rgb({"ALL": (r, 255, 0)})
+                self.sdk_object.set_rgb({"ALL": (r, 0, 255)})
+                time.sleep(self.delay)
 
-            for b in range(255, 0, -self.step):
+            for b in range(255, 0, -1):
                 if not self.is_running:
                     return None
                 self.sdk_object.set_rgb({"ALL": (255, 0, b)})
+                time.sleep(self.delay)
 
 
 if __name__ == '__main__':

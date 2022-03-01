@@ -1,10 +1,11 @@
-# PyPeripheral
+# PyPeripheral  
 ### A Python Library for Controlling RGB Devices  
->This is a upgraded version of PyPeripheral that I wrote 3 years ago. If you would like to check pure python version of this project, please check [this branch](https://github.com/gooday2die/PyPeripheral/tree/OOP_Version)
+>Hello to those who have been starring this repository for a long time. My first commit for this project was 3 years ago. However, I could not update the project since I no longer had the access to my old PC. My old PC had all those Peripheral devices to test with. However, I just got back to my place where I can access my old PC. So I will be updating this project as much as possible. I am sorry for letting you guys wait, and lets get started.  
+
+> Also an updated version with the same project in `cython` can be found [here](https://github.com/gooday2die/PyRGBDev)
   
 ### Motivation & Goal  
-I got multiple RGB peripheral devices from multiple brands: Razer, Corsair, MSI. So, whenever I try to use a simple *rainbow shifting* effect for each devices, they do not sync. So the main motivation and goal of this project is to **"Provide a Python library for controlling every RGB devices all together"**   
-
+I got multiple RGB peripheral devices from multiple brands: Razer, Corsair, MSI. So, whenever I try to use a simple `rainbow` effect for each devices, they do not sync. So the main motivation and goal of this project is to **"Provide a Python library for controlling every RGB devices all together"**   
 ## Installing this Project  
 Installing this library for your personal project would be a piece of cake. There will be multiple ways of installing this project, however the easiest way would be using `pip`. 
   
@@ -16,56 +17,50 @@ Installing this library for your personal project would be a piece of cake. Ther
   ### Installation by PIP
   1. `pip install PyPeripheral`
   2. That's it!
-
-### If you encounter those errors:
-1. `ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory:`
-2. `error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/`
- 
-Please check [here](https://github.com/gooday2die/PyPeripheral/blob/cython/github/KnownIssues.md) for support. 
-
+  
 ## Examples
 > Please note that current version of PyPeripheral supports two SDKs.
 > - Corsair
 > - Razer
 
-Turning on RGBs of each devices is easy as below using PyPeripheral!
-### Setting Corsair Keyboard Color Yellow
+### Setting Corsair Keyboard's Color All Red
+
 ```
->>> from PyPeripheral import Corsair
->>> a = Corsair.sdk()
->>> a.connect()
-True
->>> a.set_rgb({"Keyboard": (255, 255,0)})
-1
-```
-### Setting Razer Mouse Color Red
-```
->>> from PyPeripheral import Razer
->>> b = Razer.sdk()
->>> b.connect()
-True
->>> b.set_rgb({"Mouse": (255, 255, 0)})
-0
-```
-### Setting All Connected Devices Color Blue
-```
->>> from PyPeripheral import All
->>> c = All.sdk()
->>> c.connect()
->>> c.set_rgb({"ALL": (0, 0, 255)})
+from PyPeripheral import Corsair
+c = Corsair.SDK()
+c.connect()
+c.set_rgb({"Keyboard": (255, 0, 0)})
 ```
 
-## Using PyPeripheral
-Will be updated soon
+### Setting Razer Mouse Color All Blue
+```
+from PyPeripheral import Razer
+r = Razer.SDK()
+r.connect()
+r.set_rgb({"Mouse": (0, 0, 255)})
+```
 
-
+### Setting Every Device All Green
+```
+from PyPeripheral import All
+a = All.SDK()
+a.connect()
+a.set_rgb({"All": (0, 255, 0)})
+```
+### Getting All Razer Devices
+```
+>>> r.get_all_device_information()
+{'Mouse': [('DeathAdderElite', 0), ('DeathAdderEssential', 1)]}
+>>> r.get_device_information(1)
+('Mouse', 'DeathAdderEssential')
+```
 ## Demos
-For demonstration videos and gifs, please check [here](https://github.com/gooday2die/PyPeripheral/tree/Cython/Demos) for more information! The demo contains most loved **Screen Reactive Lightning** feature as well!
+For demonstration videos and gifs, please check [here](https://github.com/gooday2die/PyPeripheral/tree/OOP_Version/Demos) for more information! The demo contains most loved **Screen Reactive Lightning** feature as well!
 ## Contributions  
 I do not have every RGB devices on planet Earth. If you have any devices and brands that I do not possess, you can defintely help me out. Do not feel afraid contributing this project. It's open source and everyone can contribute to it.   
   
 ### I would like to contribute for a SDK  
-Check [here](https://github.com/gooday2die/PyPeripheral/tree/Cython/PyPeripheral/AbstractSDK) for more information. This project would be a OOP style and abstraction style project. So everyone who is interested in this project can support this project by making a `SDK Wrapper` with their own style. **One and only rule is following the abstraction rules**, and beyond that, everything would be up to you. 
+`Wrapper/abstractSDK.py` has all the information for abstraction. Check [here](https://github.com/gooday2die/PyPeripheral/blob/OOP_Version/PyPeripheral/PyPeripheral/AbstractSDKClass.md) for more information. This project would be a OOP style and abstraction style project. So everyone who is interested in this project can support this project by making a `SDK Wrapper` with their own style. **One and only rule is following the abstraction rules**, and beyond that, everything would be up to you. For example, If you would like to support this project by providing a `SDK Wrapper` for Logitech, you are very much welcomed.  
   
 ### I would like to volunteer as tester  
 Download this project and run simple demos. demos will be provided in the script soon. If you have checked any issues, or confirmed that the program is working for your devices and your environment, let me know by sending a simple email to edina00@naver.com. I will very much appreciate your help and will upload your demo videos or images if provided.  
@@ -74,9 +69,14 @@ Please report it through issue sections. Or, if you can manage to fix that bug y
 
 ## Supported SDKs
 
-- Corsair ICUE SDK (By @Gooday2die)
-- Razer Chroma SDK (By @Gooday2die)
+- Corsair ICUE SDK (thanks to [cue-sdk](https://github.com/CorsairOfficial/cue-sdk))
+- Razer Chroma SDK (thanks to [requests](https://github.com/psf/requests))
 
 ## Confirmed Checking Devices
-Check [here](https://github.com/gooday2die/PyPeripheral/blob/Cython/github/WorkingDevices.md) for more information
+### Corsair
+- MM800RGB
+- GLAIVE PRO RGB
+
+### Razer
+- Deathadder Elite Chroma
 
